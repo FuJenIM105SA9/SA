@@ -30,7 +30,7 @@
         <input type="submit" value="Upload"> Press here to upload the file! (<200mb)
     </form>
     ${message}<p>
-    <img src="resources\allowanceFileUpload\<c:out value="${SalesOrder.autoid}"/>.jpg" width="30%">
+    <img src="resources\allowanceFileUpload\<c:out value="${SalesOrder.soid}${SalesOrder.mid}${SalesOrder.pid}"/>.jpg" width="30%">
    <div class="col-md-3"></div>
 	<div class="col-md-6">
 				<form method="get" action="aConfirm" id="aConfirmForm">

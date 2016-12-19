@@ -76,7 +76,15 @@
                 <h4>${product.category}</h4>
                 <h5>${product.details}</h5>
              	<h5>TWD ${product.price}</h5>
-                <a class="btn btn-default" href="addShoppingCart?id=${product.id}">加入購物車</a>
+             	<c:choose>
+					  				<c:when test="${product.inventory <= 0}">
+										存貨不足
+    								</c:when>
+    								<c:otherwise>
+        								<a class="btn btn-default" href="addShoppingCart?id=${product.id}">加入購物車</a>
+    								</c:otherwise>
+								</c:choose>		
+                
             </div>
        </div> 
     </c:forEach>    

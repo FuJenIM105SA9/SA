@@ -42,13 +42,16 @@
 					  		<td>
 					  		<c:choose>
 					  				<c:when test="${empty SalesOrder.custArrivalTime && SalesOrder.state == 'Paid'}">
-										<a class="btn btn-default" href="arrive?id=${SalesOrder.id}">到貨</a>
+										<a class="btn btn-primary" href="arrive?id=${SalesOrder.id}">到貨</a>
     								</c:when>
     								<c:when test="${SalesOrder.state == 'Return Requested'}">
 										已申請退貨
     								</c:when>
     								<c:when test="${SalesOrder.state == 'Change Requested'}">
 										已申請換貨
+    								</c:when>
+    								<c:when test="${SalesOrder.state =='Allowance Requested'}">
+										已申請折讓
     								</c:when>
     								<c:otherwise>
         								${SalesOrder.custArrivalTime}
@@ -57,10 +60,13 @@
 								
 					  		<td><c:choose>
 					  				<c:when test="${SalesOrder.state=='Paid'||SalesOrder.state=='Arrived'}">
-										<a class="btn btn-default" href="returnProduct?id=${SalesOrder.id}">退貨</a>
+										<a class="btn btn-primary" href="returnProduct?id=${SalesOrder.id}">退貨</a>
     								</c:when>
     								<c:when test="${SalesOrder.state == 'Change Requested'}">
 										已申請換貨
+    								</c:when>
+    								<c:when test="${SalesOrder.state =='Allowance Requested'}">
+										已申請折讓
     								</c:when>
     								<c:otherwise>
         							處理中
@@ -69,10 +75,13 @@
 								     </c:choose>			
 					  		<td><c:choose>
 					  				<c:when test="${SalesOrder.state=='Arrived'}">
-										<a class="btn btn-default" href="changeProduct?id=${SalesOrder.id}">換貨</a>
+										<a class="btn btn-primary" href="changeProduct?id=${SalesOrder.id}">換貨</a>
     								</c:when>
     								<c:when test="${SalesOrder.state =='Return Requested'}">
 										已申請退貨
+    								</c:when>
+    								<c:when test="${SalesOrder.state =='Allowance Requested'}">
+										已申請折讓
     								</c:when>
     								<c:when test="${SalesOrder.state=='Paid'}">
 										貨未到
@@ -82,7 +91,26 @@
     								</c:otherwise>
     								
 								     </c:choose>	
-					  		<td><a class="btn btn-default" href="uploadAllowanceFile?soid=${SalesOrder.soid}&autoid=${SalesOrder.autoid}&pid=${SalesOrder.productId}">折讓</a>
+					  		<td>
+					  		
+					  	<c:choose>
+					  				<c:when test="${SalesOrder.state=='Arrived'}">
+										<a class="btn btn-primary" href="uploadAllowanceFile?soid=${SalesOrder.soid}&autoid=${SalesOrder.autoid}&pid=${SalesOrder.productId}">折讓</a>
+    								</c:when>
+    								<c:when test="${SalesOrder.state =='Return Requested'}">
+										已申請退貨
+    								</c:when>
+    								<c:when test="${SalesOrder.state =='Change Requested'}">
+										已申請換貨
+    								</c:when>
+    								<c:when test="${SalesOrder.state=='Paid'}">
+										貨未到
+    								</c:when>
+    								<c:otherwise>
+        							處理中
+    								</c:otherwise>
+    								
+								     </c:choose>
 					  	</tr>
 				  	</c:forEach>
 				</table>

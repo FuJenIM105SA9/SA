@@ -125,6 +125,8 @@ span {
       <li><a href="returnListfinal">退貨單</a></li>
      <li><a href="changeListfinal">換貨單</a></li>  
       <li><a href="changeList">應換貨</a></li>
+       <li><a href="allowanceList">應折讓</a></li>
+       <li><a href="allowanceListfinal">折讓單</a></li> 
 
       <li><a href="managerAfterSales">會員</a></li>
     </ul>

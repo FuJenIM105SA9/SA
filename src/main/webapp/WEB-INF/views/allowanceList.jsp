@@ -60,11 +60,11 @@
 					  		<td>${AllowanceOrder.detail}</td>
 					  		<td><form method="get" action="allowanceconfirm" id="allowanceconfirmForm">
 					  		 <div class="form-group">
-					  		 <input type="hidden" name = "aid" value="${AllowanceOrder.getAId()}">
+					  		 <input type="hidden" name = "count" value="${AllowanceOrder.count}">
                                  <input type="number" name="APrice" placeholder="輸入折讓金額" required>	
                              </div>
 	                           <div class="form-group">
-                             <button type="submit" class="btn btn-default">確認折讓</button>
+                             <button type="submit" class="btn btn-primary">確認折讓</button>
                             </div>
                             </form>
 					  	</tr>

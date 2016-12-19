@@ -55,12 +55,12 @@ public class AllowanceOrderDAODB implements AllowanceOrderDAO{
 		
 	}*/
 	
-	public void insert(long mid, long pid, long soid , String detail,long autoid) {
+	public void insert(long mid, long pid, long soid , String detail) {
 		System.out.println("mid: " + mid);
 		System.out.println("pid: " + pid);
 		System.out.println("soid: " + soid);
 		// remove first parameter when Id is auto-increment
-	    String sql = "INSERT INTO allowanceOrder (ProductID, ManagerID, SOID, allowanceOrderTime , Detail ,Autoid) VALUES(?, ?, ?, NOW(),? , ?)";
+	    String sql = "INSERT INTO allowanceOrder (ProductID, ManagerID, SOID, allowanceOrderTime , Detail ) VALUES(?, ?, ?, NOW(),? )";
 	    String sql2 = "UPDATE salesorderitem SET State = 'Allowance Requested' "
 				+ "WHERE SOID = ? AND ProductID = ?";
 		try {
@@ -70,7 +70,7 @@ public class AllowanceOrderDAODB implements AllowanceOrderDAO{
 			smt.setLong(2, mid);
 			smt.setLong(3, soid);
 			smt.setString(4, detail);
-			smt.setLong(5, autoid);
+			
 			smt.executeUpdate();			
 			smt.close();
 			smt2 = conn.prepareStatement(sql2);
@@ -143,8 +143,11 @@ public class AllowanceOrderDAODB implements AllowanceOrderDAO{
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
 			rs = smt.executeQuery();
+			int i=0;
 			while(rs.next()){
 				AllowanceOrder aAllowance = new AllowanceOrder();
+				aAllowance.setCount(i);
+				i++;
 				aAllowance.setAId(rs.getLong("AID"));			
 				aAllowance.setProductId(rs.getLong("ProductID"));
 				aAllowance.setManagerId(rs.getLong("ManagerID"));

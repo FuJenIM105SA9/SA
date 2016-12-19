@@ -356,10 +356,10 @@ public class SalesOrderController {
 		System.out.println("mid2:"+mid);
 		System.out.println("detail:"+detail);
 	
-		dao.insert(mid, pid, SalesOrder.getSoid() ,detail, autoid);
+		dao.insert(mid, pid, SalesOrder.getSoid() ,detail);
 		
-		
-		  model.addObject("SalesOrderList",SalesOrderList);
+		List<SalesOrder> SalesOrderList2 = sdao.getList2(mid);
+		  model.addObject("SalesOrderList",SalesOrderList2);
 	    return model;
 	  
 	  
@@ -437,17 +437,18 @@ public class SalesOrderController {
 		 }
 
 	@RequestMapping(value = "/allowanceconfirm", method = RequestMethod.GET)
-	public ModelAndView allowanceconfirm(@ModelAttribute ("aid") int aid,@ModelAttribute ("APrice")double APrice ){
+	public ModelAndView allowanceconfirm(@ModelAttribute ("count") int count,@ModelAttribute ("APrice")double APrice ){
          ModelAndView model = new ModelAndView("allowanceList");
          AllowanceOrderDAO adao = (AllowanceOrderDAO)context.getBean("AllowanceOrderDAO");
 		  SalesOrderDAO dao = (SalesOrderDAO)context.getBean("SalesOrderDAO");
 		  List<AllowanceOrder> AllowanceOrderList = adao.getList2();
-		  long pid= AllowanceOrderList.get(aid-1).getProductId();
-		  long soid= AllowanceOrderList.get(aid-1).getsoid();
+		  long pid= AllowanceOrderList.get(count).getProductId();
+		  long soid= AllowanceOrderList.get(count).getsoid();
 		  System.out.println("APrice"+APrice);
 		  adao.confirmallowance(pid, soid , APrice);
-			System.out.println("aid="+aid);
-			model.addObject("AllowanceOrderList",AllowanceOrderList);
+		  List<AllowanceOrder> AllowanceOrderList2 = adao.getList2();
+			System.out.println("count="+count);
+			model.addObject("AllowanceOrderList",AllowanceOrderList2);
 		 
 		  return model;
 		 }

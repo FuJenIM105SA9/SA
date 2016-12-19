@@ -42,7 +42,7 @@
 				
 						<input type="text" name="detail" placeholder="輸入產品情況" required>
 				
-			  		<button type="submit" class="btn btn-default">確認折讓</button>
+			  		<button type="submit" class="btn btn-primary">確認折讓</button>
 				</form>
 			</div>
 			<div class="col-md-3"></div>

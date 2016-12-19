@@ -3,6 +3,7 @@ package com.sample.product.entity;
 import java.sql.Date;
 
 public class AllowanceOrder {
+	private int count;
     private long AId;
     private long productId;
     private long managerId;
@@ -64,6 +65,12 @@ public class AllowanceOrder {
 	}
 	public void setDetail(String detail) {
 		this.detail = detail;
+	}
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
 	}
 
 }

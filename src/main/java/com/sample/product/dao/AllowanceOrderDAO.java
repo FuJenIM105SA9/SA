@@ -12,7 +12,7 @@ import com.sample.product.entity.SalesOrder;
 
 public interface AllowanceOrderDAO {	
 	
-	public void insert(long mid, long pid, long soid , String aConfirm);
+	public void insert(long mid, long pid, long soid , String detail);
 	//public void update(long mid, long pid, long soid, String reason);
 
 	public void confirmallowance(long pid,long soid) ;

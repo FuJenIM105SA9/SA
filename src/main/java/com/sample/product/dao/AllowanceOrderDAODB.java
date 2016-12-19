@@ -55,12 +55,12 @@ public class AllowanceOrderDAODB implements AllowanceOrderDAO{
 		
 	}*/
 	
-	public void insert(long mid, long pid, long soid , String aConfirm) {
+	public void insert(long mid, long pid, long soid , String detail) {
 		System.out.println("mid: " + mid);
 		System.out.println("pid: " + pid);
 		System.out.println("soid: " + soid);
 		// remove first parameter when Id is auto-increment
-	    String sql = "INSERT INTO allowanceOrder (ProductID, ManagerID, SOID, allowanceOrderTime , aConfirm) VALUES(?, ?, ?, NOW(),?)";
+	    String sql = "INSERT INTO allowanceOrder (ProductID, ManagerID, SOID, allowanceOrderTime , Detail) VALUES(?, ?, ?, NOW(),?)";
 	    String sql2 = "UPDATE salesorderitem SET State = 'Allowance Requested' "
 				+ "WHERE SOID = ? AND ProductID = ?";
 		try {
@@ -69,7 +69,7 @@ public class AllowanceOrderDAODB implements AllowanceOrderDAO{
 			smt.setLong(1, pid);
 			smt.setLong(2, mid);
 			smt.setLong(3, soid);
-			smt.setString(4, aConfirm);
+			smt.setString(4, detail);
 			smt.executeUpdate();			
 			smt.close();
 			smt2 = conn.prepareStatement(sql2);

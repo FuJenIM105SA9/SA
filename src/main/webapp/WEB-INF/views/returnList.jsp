@@ -13,7 +13,7 @@
     <title>Jackie Chen 3C</title>
 </head>
 <body>
-	<%@include file="navbarLogin.jspf" %>
+	<%@include file="navbarAfterSales.jspf" %>
     <div class="container theme-showcase" role="main">
     
     

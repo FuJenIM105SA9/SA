@@ -70,6 +70,33 @@ public class ProductController {
 		return model;
 	}
 	
+	@RequestMapping(value = "/managerSalesmen", method = RequestMethod.GET)
+	public ModelAndView memberSales(){
+		ModelAndView model = new ModelAndView("managerSalesmen");
+		ManagerDAO dao = (ManagerDAO) context.getBean("managerDAO");
+		List<Manager> list = dao.getList();
+		model.addObject(list);
+		return model;
+	}
+	
+	@RequestMapping(value = "/managerWarehouse", method = RequestMethod.GET)
+	public ModelAndView memberWarehouse(){
+		ModelAndView model = new ModelAndView("managerWarehouse");
+		ManagerDAO dao = (ManagerDAO) context.getBean("managerDAO");
+		List<Manager> list = dao.getList();
+		model.addObject(list);
+		return model;
+	}
+	
+	@RequestMapping(value = "/managerAfterSales", method = RequestMethod.GET)
+	public ModelAndView memberAftersales(){
+		ModelAndView model = new ModelAndView("managerAfterSales");
+		ManagerDAO dao = (ManagerDAO) context.getBean("managerDAO");
+		List<Manager> list = dao.getList();
+		model.addObject(list);
+		return model;
+	}
+	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public ModelAndView logout(HttpServletRequest request){
 		HttpSession session = request.getSession();
@@ -183,18 +210,18 @@ public class ProductController {
 		return model;
 	}
 	
-	@RequestMapping(value = "/productcon", method = RequestMethod.POST)
+	@RequestMapping(value = "/productSalesmen", method = RequestMethod.POST)
 	public ModelAndView productcon(){
-		ModelAndView model = new ModelAndView("productcon");
+		ModelAndView model = new ModelAndView("productSalesmen");
 		ProductDAO dao = (ProductDAO) context.getBean("productDAO");
 		List<Product> list = dao.getList();
 		model.addObject(list);
 		return model;
 	}//getProductList
 	
-	@RequestMapping(value = "/productcon", method = RequestMethod.GET)
+	@RequestMapping(value = "/productSalesmen", method = RequestMethod.GET)
 	public ModelAndView productconUser(){
-		ModelAndView model = new ModelAndView("productcon");
+		ModelAndView model = new ModelAndView("productSalesmen");
 		ProductDAO dao = (ProductDAO) context.getBean("productDAO");
 		List<Product> list = dao.getList();
 		model.addObject(list);
@@ -261,7 +288,7 @@ public class ProductController {
 		}
 		else if(("sales".equals(account.getName()))&&"sales".equals(account.getPassword())){
 			System.out.println("Sales Success");
-			model = new ModelAndView("redirect:/productcon");
+			model = new ModelAndView("productSalesmen");
 			HttpSession session = request.getSession();
 			session.setAttribute("username",account.getName());
 			String user=(String) session.getAttribute("username");
@@ -269,7 +296,7 @@ public class ProductController {
 		}
 		else if(("warehouse".equals(account.getName()))&&"warehouse".equals(account.getPassword())){
 			System.out.println("Warehouse Success");
-			model = new ModelAndView("redirect:/productWarehouse");
+			model = new ModelAndView("productWarehouse");
 			HttpSession session = request.getSession();
 			session.setAttribute("username",account.getName());
 			String user=(String) session.getAttribute("username");
@@ -277,7 +304,7 @@ public class ProductController {
 		}
 		else if(("aftersales".equals(account.getName()))&&"aftersales".equals(account.getPassword())){
 			System.out.println("aftersales Success");
-			model = new ModelAndView("redirect:/productAfterSales");
+			model = new ModelAndView("productAfterSales");
 			HttpSession session = request.getSession();
 			session.setAttribute("username",account.getName());
 			String user=(String) session.getAttribute("username");

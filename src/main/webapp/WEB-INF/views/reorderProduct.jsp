@@ -14,7 +14,7 @@
     <title>產品管理</title>
     </head>
 <body>
-	<%@include file="navbarLogin.jspf" %>
+	<%@include file="navbarWarehouse.jspf" %>
     <div class="container theme-showcase" role="main">
     
       <div class="jumbotron" >    
@@ -47,7 +47,6 @@
 					  	</tr>
 				  	</c:forEach>
 				</table>
-				<a class="btn btn-default" href="po">進貨單</a>
 			</div>
 		</div>
 	</div>

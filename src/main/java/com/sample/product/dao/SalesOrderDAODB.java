@@ -184,7 +184,7 @@ public void delivery(long pid,long soid) {
 }
 public List<SalesOrder> getList1(long mid){
 	
-	String sql = "SELECT * FROM SalesOrderItem  WHERE ManagerID ="+mid+"";
+	String sql = "SELECT ProductID FROM SalesOrderItem";
 	return getList(sql);
 }
 public List<SalesOrder> getList2(long mid){
@@ -233,6 +233,7 @@ public List<SalesOrder> getList7(){
 + "WHERE salesorderitem.State = 'Change Requested'";
 	return getList(sql);
 }
+
 
 public List<SalesOrder> getList(String sql) {
 	

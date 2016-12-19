@@ -82,7 +82,7 @@
     								</c:otherwise>
     								
 								     </c:choose>	
-					  		<td><a class="btn btn-default" href="uploadAllowanceFile?(soid=${SalesOrder.soid}&&autoid=${SalesOrder.autoid}&&pid=${SalesOrder.productId})">折讓</a>
+					  		<td><a class="btn btn-default" href="uploadAllowanceFile?soid=${SalesOrder.soid}&autoid=${SalesOrder.autoid}&pid=${SalesOrder.productId}">折讓</a>
 					  	</tr>
 				  	</c:forEach>
 				</table>

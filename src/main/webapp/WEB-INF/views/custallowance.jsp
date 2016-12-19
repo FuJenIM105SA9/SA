@@ -39,9 +39,9 @@
               <input type="hidden" name = "soid" value="${SalesOrder.soid}">
 						<label>折讓狀況描述:</label>
 				
-						<input type="text" name="details" placeholder="輸入產品情況" required>
+						<input type="text" name="detail" placeholder="輸入產品情況" required>
 				
-			  		<button type="submit？autoid=${SalesOrder.autoid}&&pid=${SalesOrder.productId}" class="btn btn-default">確認折讓</button>
+			  		<button type="submit" class="btn btn-default">確認折讓</button>
 				</form>
 			</div>
 			<div class="col-md-3"></div>

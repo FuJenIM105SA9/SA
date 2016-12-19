@@ -309,9 +309,13 @@ public class SalesOrderController {
 		HttpSession session = request.getSession();
  		String user=(String) session.getAttribute("username");
  		ManagerDAO managerDAO = (ManagerDAO)context.getBean("managerDAO");
+        SalesOrderDAO dao = (SalesOrderDAO) context.getBean("SalesOrderDAO");
  		long mid = managerDAO.get(user).getId();
+ 		List<SalesOrder> SalesOrderList = dao.getList2(mid);
+ 		long pid=SalesOrderList.get((int)SalesOrder.getAutoid()-1).getProductId();
+ 		SalesOrder.setProductId(pid);
 		System.out.println("autoid1:"+SalesOrder.getAutoid());
-		System.out.println("pid:"+SalesOrder.getProductId());
+		System.out.println("pid:"+pid);
 		System.out.println("mid:"+mid);
 		System.out.println("soid:"+SalesOrder.getSoid());
         allowance.setsoid(SalesOrder.getSoid());
@@ -324,21 +328,29 @@ public class SalesOrderController {
 	  
 	}
 	@RequestMapping(value = "/aConfirm", method = RequestMethod.GET)
-	public ModelAndView allowanceConfirm(@ModelAttribute SalesOrder SalesOrder,@ModelAttribute ("aConfirm")String detail, @ModelAttribute ("autoid") long autoid,HttpServletRequest request,@ModelAttribute ("pid") long pid,@ModelAttribute AllowanceOrder allowance){
+	public ModelAndView allowanceConfirm(@ModelAttribute SalesOrder SalesOrder,@ModelAttribute ("detail")String detail, @ModelAttribute ("autoid") long autoid,HttpServletRequest request){
 		ModelAndView model = new ModelAndView("SalesOrder");
 		HttpSession session = request.getSession();
  		String user=(String) session.getAttribute("username");
  		AllowanceOrderDAO dao = (AllowanceOrderDAO)context.getBean("AllowanceOrderDAO");
  		ManagerDAO managerDAO = (ManagerDAO)context.getBean("managerDAO");
- 		long mid = managerDAO.get(user).getId();
+ 		  SalesOrderDAO sdao = (SalesOrderDAO) context.getBean("SalesOrderDAO");
+ 	 		long mid = managerDAO.get(user).getId();
+ 	 		List<SalesOrder> SalesOrderList = sdao.getList2(mid);
+ 	 		long pid=SalesOrderList.get((int)SalesOrder.getAutoid()-1).getProductId();
+ 	 		SalesOrder.setProductId(pid);
+ 		
+ 		pid = SalesOrder.getProductId();
+ 		
 		System.out.println("autoid2:"+autoid);
+		System.out.println("soid2:"+SalesOrder.getSoid());
 		System.out.println("pid2:"+pid);
 		System.out.println("mid2:"+mid);
-		System.out.println("pid222:"+allowance.getProductId());
-		dao.insert(mid, pid, autoid ,detail);
+		System.out.println("detail:"+detail);
+	
+		dao.insert(mid, pid, SalesOrder.getSoid() ,detail);
 		
-		SalesOrderDAO sdao = (SalesOrderDAO)context.getBean("SalesOrderDAO");
-		  List<SalesOrder> SalesOrderList = sdao.getList2(mid);
+		
 		  model.addObject("SalesOrderList",SalesOrderList);
 	    return model;
 	  

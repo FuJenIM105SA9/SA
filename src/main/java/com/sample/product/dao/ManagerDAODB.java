@@ -30,6 +30,11 @@ public class ManagerDAODB implements ManagerDAO {
 		String sql = "SELECT * FROM manager";
 		return getList(sql);
 	}
+	
+	public List<Manager> getList2(String name){
+		String sql = "SELECT * FROM manager WHERE Name LIKE '%"+name+"%'";
+		return getList(sql);
+	}
 
 	// make it a generic method for different conditions
 	public List<Manager> getList(String sql) {

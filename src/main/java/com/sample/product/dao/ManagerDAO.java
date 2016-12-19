@@ -8,7 +8,9 @@ public interface ManagerDAO {
 	
 	public List<Manager> getList();
 	public void insert(Manager manager);
-
+	
+	public List<Manager> getList2(String name);
+	
 	public Manager get(long id);
 	
 	public Manager get(String name);

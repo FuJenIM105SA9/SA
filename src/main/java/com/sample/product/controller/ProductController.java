@@ -124,6 +124,22 @@ public class ProductController {
 		return model;
 	}
 	
+	@RequestMapping(value = "/searchManager", method = RequestMethod.POST)
+	public ModelAndView searchManager(){
+		ModelAndView model = new ModelAndView("redirect:/managerAfterSales");
+		
+		return model;
+	}//getProductList
+	@RequestMapping(value = "/searchManager", method = RequestMethod.GET)
+	public ModelAndView searchManager2(@ModelAttribute("search") String name){
+		ModelAndView model = new ModelAndView("managerAfterSales");
+		ManagerDAO dao = (ManagerDAO) context.getBean("managerDAO");
+		List<Manager> list = dao.getList2(name);
+	
+		model.addObject(list);
+		return model;
+	}
+	
 	@RequestMapping(value = "/search1", method = RequestMethod.POST)
 	public ModelAndView search1(){
 		ModelAndView model = new ModelAndView("redirect:/productcon");
@@ -192,6 +208,40 @@ public class ProductController {
 		return getProductList();
 	}//getProductList
 	//list all products	
+	
+	@RequestMapping(value = "/productAfterSales", method = RequestMethod.POST)
+	public ModelAndView productAfterSales(){
+		ModelAndView model = new ModelAndView("productAfterSales");
+		ProductDAO dao = (ProductDAO) context.getBean("productDAO");
+		List<Product> list = dao.getList();
+		model.addObject(list);
+		return model;
+	}
+	@RequestMapping(value = "/productAfterSales", method = RequestMethod.GET)
+	public ModelAndView productAfterSales2(){
+		ModelAndView model = new ModelAndView("productAfterSales");
+		ProductDAO dao = (ProductDAO) context.getBean("productDAO");
+		List<Product> list = dao.getList();
+		model.addObject(list);
+		return model;
+	}
+	
+	@RequestMapping(value = "/productWarehouse", method = RequestMethod.POST)
+	public ModelAndView productWarehouse(){
+		ModelAndView model = new ModelAndView("productWarehouse");
+		ProductDAO dao = (ProductDAO) context.getBean("productDAO");
+		List<Product> list = dao.getList();
+		model.addObject(list);
+		return model;
+	}
+	@RequestMapping(value = "/productWarehouse", method = RequestMethod.GET)
+	public ModelAndView productWarehouse2(){
+		ModelAndView model = new ModelAndView("productWarehouse");
+		ProductDAO dao = (ProductDAO) context.getBean("productDAO");
+		List<Product> list = dao.getList();
+		model.addObject(list);
+		return model;
+	}
 	
 	@RequestMapping(value = "/productCust", method = RequestMethod.POST)
 	public ModelAndView productCust(){
@@ -288,7 +338,7 @@ public class ProductController {
 		}
 		else if(("sales".equals(account.getName()))&&"sales".equals(account.getPassword())){
 			System.out.println("Sales Success");
-			model = new ModelAndView("productSalesmen");
+			model = new ModelAndView("redirect:/productSalesmen");
 			HttpSession session = request.getSession();
 			session.setAttribute("username",account.getName());
 			String user=(String) session.getAttribute("username");
@@ -296,7 +346,7 @@ public class ProductController {
 		}
 		else if(("warehouse".equals(account.getName()))&&"warehouse".equals(account.getPassword())){
 			System.out.println("Warehouse Success");
-			model = new ModelAndView("productWarehouse");
+			model = new ModelAndView("redirect:/productWarehouse");
 			HttpSession session = request.getSession();
 			session.setAttribute("username",account.getName());
 			String user=(String) session.getAttribute("username");
@@ -304,7 +354,7 @@ public class ProductController {
 		}
 		else if(("aftersales".equals(account.getName()))&&"aftersales".equals(account.getPassword())){
 			System.out.println("aftersales Success");
-			model = new ModelAndView("productAfterSales");
+			model = new ModelAndView("redirect:/productAfterSales");
 			HttpSession session = request.getSession();
 			session.setAttribute("username",account.getName());
 			String user=(String) session.getAttribute("username");

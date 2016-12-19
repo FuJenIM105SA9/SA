@@ -212,7 +212,7 @@ public class ProductController {
 	
 	@RequestMapping(value = "/productSalesmen", method = RequestMethod.POST)
 	public ModelAndView productcon(){
-		ModelAndView model = new ModelAndView("productSalesmen");
+		ModelAndView model = new ModelAndView("productcon");
 		ProductDAO dao = (ProductDAO) context.getBean("productDAO");
 		List<Product> list = dao.getList();
 		model.addObject(list);
@@ -221,7 +221,7 @@ public class ProductController {
 	
 	@RequestMapping(value = "/productSalesmen", method = RequestMethod.GET)
 	public ModelAndView productconUser(){
-		ModelAndView model = new ModelAndView("productSalesmen");
+		ModelAndView model = new ModelAndView("productcon");
 		ProductDAO dao = (ProductDAO) context.getBean("productDAO");
 		List<Product> list = dao.getList();
 		model.addObject(list);

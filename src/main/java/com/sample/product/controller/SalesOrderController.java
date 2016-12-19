@@ -155,8 +155,9 @@ public class SalesOrderController {
 		  long pid= SalesOrderList.get(id).getProductId();
 		  long soid= SalesOrderList.get(id).getSoid();
 		  dao.arrive(pid,soid);
+		  List<SalesOrder> SalesOrderList2 = dao.getList2(mid);
 			System.out.println("111pid="+pid+"soid="+soid);
-			model.addObject("SalesOrderList",SalesOrderList);
+			model.addObject("SalesOrderList",SalesOrderList2);
 		 
 		  return model;
 		 }

@@ -91,7 +91,7 @@
 						</form>
 					</div>
       
-	<div class="container">
+	<div class="container" >
 	<form method="get" action="search" id="searchForm">
 	
 	<div class="form-group">
@@ -116,11 +116,10 @@
 	<form action="searchCat">
 	<div  class="form-group">
 							<select class="form-control" name="c"> 
-  							<option>Horror</option>
-  							<option>Action</option>
-  							<option>Drama</option>
-  							<option>True Story</option>
-  							<option>Comedy</option>
+  							<option>Mobile</option>
+  							<option>Camera</option>
+  							<option>Graphics Card</option>
+  							
 							</select><button  type="submit" class="glyphicon glyphicon-search"></button>							
 					</div>	
 
@@ -132,7 +131,7 @@
 		<div class="row">
 			<br>
 			<div class="col-md-4">
-               <center><img src="resources\fileUpload\<c:out value="${product.id}"/>.jpg" width="30%"></center>
+               <center><img src="resources\fileUpload\<c:out value="${product.id}"/>.jpg" width="50%"></center>
             </div>
             <div class="col-md-8">
             	<td>${product.desc}</td>

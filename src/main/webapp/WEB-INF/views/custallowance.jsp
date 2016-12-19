@@ -27,7 +27,7 @@
     <form method="POST" action="uploadAllowanceFile" enctype="multipart/form-data">
   <input type="hidden" name = "autoid" value="${SalesOrder.autoid}">
    <input type="hidden" name = "soid" value="${SalesOrder.soid}">
-        File to upload: <input type="file" name="file"><br /> 
+          請選擇要上傳的商品瑕疵圖片: <input type="file" name="file"><br /> 
         <input type="submit" value="Upload"> Press here to upload the file! (<200mb)
     </form>
     ${message}<p>

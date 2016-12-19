@@ -42,7 +42,7 @@ public class picturecontroller {
 	}
 	@RequestMapping(value = "/return", method = RequestMethod.GET)
 	public ModelAndView home3(@ModelAttribute Product product) {
-		ModelAndView model = new ModelAndView("redirect:/productcon");
+		ModelAndView model = new ModelAndView("redirect:/productSalesmen");
 		
 		return model;
 	}

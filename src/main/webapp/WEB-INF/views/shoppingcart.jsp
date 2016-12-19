@@ -25,7 +25,7 @@
 		<div class="row">
 			<br>
 			<div class="col-md-12">
-			<a class="btn btn-primary" href="checkout?id=${product.id}">結帳</a>
+			
 				<table class="table">
 				  	<tr>
 				  	  
@@ -33,7 +33,7 @@
 				  		<th>產品編號  </th>
 				  		<th>類別</th>
 				  		<th>描述</th>
-				  		<th>數量</<th>
+				  		<th>價錢</th>
 				  		<th>刪除</th>
 				  	</tr>
 				  	<c:forEach items="${shoppingCart}" var="product" varStatus="status">
@@ -44,21 +44,14 @@
 					  		<td>${product.id}</td>
 					  		<td>${product.category}</td>
 					  		<td>${product.desc}</td>
-					  		<td><div class="form-group">
-							<select class="form-control" name="Quantity">
-  							<option>1</option>
-  							<option>2</option>
-  							<option>3</option>
-  							<option>4</option>
-  							<option>5</option>
-							</select>
-					</div></td>
+					  		<td>$${product.price}</td>
 							
 					  		<td> <a class="btn btn-danger" href="deleteShopping?id=${status.index}">刪除</a>
 					  		
 					  	</tr>
 				  	</c:forEach>
 				</table>
+				<a class="btn btn-primary" href="checkout?id=${product.id}">結帳</a> 總價錢：TWD$${total}
 			</div>
 		</div>
 	</div>

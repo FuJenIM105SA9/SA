@@ -101,7 +101,13 @@ public class SalesOrderController {
 		ModelAndView model = new ModelAndView("shoppingcart");
 		ShoppingCart shoppingCart = (ShoppingCart)context.getBean("shoppingCart");
 		List<Product> content =  shoppingCart.getCart();
+		double total = 0;
+		for(int i = 0; i < content.size();i++){
+			total += content.get(i).getPrice();
+		}
 		System.out.println("products in cart:"+content.size());
+		System.out.println("Price:" + total);
+		model.addObject("total",total);
 		model.addObject("shoppingCart",content);
 		return model;
 	}

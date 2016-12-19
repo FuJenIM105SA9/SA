@@ -24,6 +24,7 @@ public class ShoppingCart implements java.io.Serializable {
 	public List<Product> getCart(){
 		return productList;
 	}
+	
 	public void add(Product aProduct){
 		productList.add(aProduct);
 	}

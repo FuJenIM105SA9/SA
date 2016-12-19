@@ -303,18 +303,18 @@ public class SalesOrderController {
 		  return model;
 	}*/
 	@RequestMapping(value = "/uploadAllowanceFile", method = RequestMethod.GET)
-	public ModelAndView allowance(@ModelAttribute AllowanceOrder allowance,@ModelAttribute SalesOrder SalesOrder, @ModelAttribute ("autoid") long autoid,HttpServletRequest request,@ModelAttribute ("pid") long pid){
+	public ModelAndView allowance(@ModelAttribute AllowanceOrder allowance,@ModelAttribute SalesOrder SalesOrder,HttpServletRequest request){
 		ModelAndView model = new ModelAndView("custallowance");
 		HttpSession session = request.getSession();
  		String user=(String) session.getAttribute("username");
  		ManagerDAO managerDAO = (ManagerDAO)context.getBean("managerDAO");
  		long mid = managerDAO.get(user).getId();
-		System.out.println("autoid1:"+autoid);
-		System.out.println("pid:"+pid);
+		System.out.println("autoid1:"+SalesOrder.getAutoid());
+		System.out.println("pid:"+SalesOrder.getProductId());
 		System.out.println("mid:"+mid);
 		System.out.println("soid:"+SalesOrder.getSoid());
         allowance.setsoid(SalesOrder.getSoid());
-        allowance.setProductId(pid); 
+        //allowance.setProductId(pid); 
         allowance.setManagerId(mid);
        //model.addObject("allowance",allowance);
         model.addObject("SalesOrder",SalesOrder);

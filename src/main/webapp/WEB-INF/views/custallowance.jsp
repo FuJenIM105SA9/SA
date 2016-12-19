@@ -36,7 +36,7 @@
 				<form method="get" action="aConfirm" id="aConfirmForm">
 				<input type="hidden" name = "autoid" value="${SalesOrder.autoid}">
              <input type="hidden" name = "pid" value="${SalesOrder.productId}">
-             
+              <input type="hidden" name = "soid" value="${SalesOrder.soid}">
 						<label>折讓狀況描述:</label>
 				
 						<input type="text" name="details" placeholder="輸入產品情況" required>

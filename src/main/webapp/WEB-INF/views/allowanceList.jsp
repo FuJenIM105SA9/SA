@@ -13,7 +13,7 @@
     <title>Jackie Chen 3C</title>
 </head>
 <body>
-	<%@include file="navbarLogin.jspf" %>
+	<%@include file="navbarAfterSales.jspf" %>
     <div class="container theme-showcase" role="main">
     
     
@@ -48,25 +48,32 @@
 			<div class="col-md-12">
 				<table class="table">
 				  	<tr>
-				  		<th>銷貨編號</th><th>商品類別</th><th>商品名稱</th><th>商品價格</th><th>折讓時間</th><th>折讓時間</th><th>購買者編號</th><th>確認折讓</th>
+				  		<th>折讓編號</th><th>商品情況</th><th>買家描述</th><th>折讓價格</th>
 				  	</tr>
-				  	<c:forEach items="${SalesOrderList}" var="SalesOrder">
+				  	<c:forEach items="${AllowanceOrderList}" var="AllowanceOrder">
 					  	<tr>
-					  	    <td>${SalesOrder.soid}</td>
-					  	    <td>${SalesOrder.category}</td>
-					  		<td>${SalesOrder.desc}</td>
-					  		<td>${SalesOrder.price}</td>
-					    	<td>${SalesOrder.orderTime}</td>
-					        <td>${SalesOrder.deliveryTime}</td>
-					    	<td>${SalesOrder.manid}</td>
-			             	<td><a class="btn btn-primary" href="allowanceconfirm?id=${SalesOrder.id}">確認換貨</a>
-
+				
+					  	    <td>${AllowanceOrder.getAId()}</td>
+					  	    <td>
+					  		<img src="resources\allowanceFileUpload\<c:out value="s${AllowanceOrder.soid}m${AllowanceOrder.managerId}p${AllowanceOrder.productId}"/>.jpg" width="30%">
+					  		</td>
+					  		<td>${AllowanceOrder.detail}</td>
+					  		<td><form method="get" action="allowanceconfirm" id="allowanceconfirmForm">
+					  		 <div class="form-group">
+					  		 <input type="hidden" name = "aid" value="${AllowanceOrder.getAId()}">
+                                 <input type="number" name="APrice" placeholder="輸入折讓金額" required>	
+                             </div>
+	                           <div class="form-group">
+                             <button type="submit" class="btn btn-default">確認折讓</button>
+                            </div>
+                            </form>
 					  	</tr>
 				  	</c:forEach>
 				</table>
 			</div>
 		</div>
 	</div>
+	
 	
 
     </div><!-- /.container -->

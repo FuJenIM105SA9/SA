@@ -12,11 +12,12 @@ import com.sample.product.entity.SalesOrder;
 
 public interface AllowanceOrderDAO {	
 	
-	public void insert(long mid, long pid, long soid , String detail);
+	public void insert(long mid, long pid, long soid , String detail ,long autoid);
 	//public void update(long mid, long pid, long soid, String reason);
 
-	public void confirmallowance(long pid,long soid) ;
+	public void confirmallowance(long pid,long soid ,double APrice) ;
 	public List<AllowanceOrder> getList();
+	public List<AllowanceOrder> getList2();
 	public List<AllowanceOrder> getList(String sql);
 	
 

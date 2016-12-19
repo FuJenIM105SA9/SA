@@ -320,6 +320,8 @@ public class SalesOrderController {
  		List<SalesOrder> SalesOrderList = dao.getList2(mid);
  		long pid=SalesOrderList.get((int)SalesOrder.getAutoid()-1).getProductId();
  		SalesOrder.setProductId(pid);
+ 		SalesOrder.setManid(mid);
+ 	
 		System.out.println("autoid1:"+SalesOrder.getAutoid());
 		System.out.println("pid:"+pid);
 		System.out.println("mid:"+mid);
@@ -354,7 +356,7 @@ public class SalesOrderController {
 		System.out.println("mid2:"+mid);
 		System.out.println("detail:"+detail);
 	
-		dao.insert(mid, pid, SalesOrder.getSoid() ,detail);
+		dao.insert(mid, pid, SalesOrder.getSoid() ,detail, autoid);
 		
 		
 		  model.addObject("SalesOrderList",SalesOrderList);
@@ -373,11 +375,23 @@ public class SalesOrderController {
 	 @RequestMapping(value = "/uploadAllowanceFile", method = RequestMethod.POST)
 	    public ModelAndView uploadFileHandler(@ModelAttribute SalesOrder SalesOrder,@ModelAttribute("file") MultipartFile file, HttpServletRequest request) {
 	    	ModelAndView model = new ModelAndView("custallowance");
-	    	
+	    	HttpSession session = request.getSession();
+	 		String user=(String) session.getAttribute("username");
+	 		ManagerDAO managerDAO = (ManagerDAO)context.getBean("managerDAO");
+	        SalesOrderDAO dao = (SalesOrderDAO) context.getBean("SalesOrderDAO");
+	 		long mid = managerDAO.get(user).getId();
+	 		List<SalesOrder> SalesOrderList = dao.getList2(mid);
+	 		long pid=SalesOrderList.get((int)SalesOrder.getAutoid()-1).getProductId();
+	 		long soid=SalesOrderList.get((int)SalesOrder.getAutoid()-1).getSoid();
+	 		SalesOrder.setProductId(pid);
+	 		SalesOrder.setManid(mid);
+	 		SalesOrder.setSoid(soid);
 	    	//save it as the file name submitted 
 	    	//String name = file.getOriginalFilename();
-	    	System.out.println("autoid:"+SalesOrder.getAutoid());
-	    	String name =SalesOrder.getAutoid()+".jpg";
+	 		System.out.println("soid3:"+SalesOrder.getSoid());
+			System.out.println("pid3:"+pid);
+			System.out.println("mid3:"+mid);
+	    	String name ="s"+SalesOrder.getSoid()+"m"+mid+"p"+pid+".jpg";
 	        String filePath = request.getSession().getServletContext().getRealPath("/") + "resources\\allowanceFileUpload\\";  
 	    	//
 	        File dir = new File(filePath);
@@ -400,11 +414,11 @@ public class SalesOrderController {
 	public ModelAndView allowanceList(){
          ModelAndView model = new ModelAndView("allowanceList");
          
-		  SalesOrderDAO dao = (SalesOrderDAO)context.getBean("SalesOrderDAO");
-		  List<SalesOrder> SalesOrderList = dao.getList6();
+         AllowanceOrderDAO adao = (AllowanceOrderDAO)context.getBean("AllowanceOrderDAO");
+		  List<AllowanceOrder> AllowanceOrderList = adao.getList2();
 		 
 	
-			model.addObject("SalesOrderList",SalesOrderList);
+			model.addObject("AllowanceOrderList",AllowanceOrderList);
 		 
 		  return model;
 		 }
@@ -417,6 +431,22 @@ public class SalesOrderController {
 		  List<AllowanceOrder> AllowanceOrderList = dao.getList();
 		 
 	
+			model.addObject("AllowanceOrderList",AllowanceOrderList);
+		 
+		  return model;
+		 }
+
+	@RequestMapping(value = "/allowanceconfirm", method = RequestMethod.GET)
+	public ModelAndView allowanceconfirm(@ModelAttribute ("aid") int aid,@ModelAttribute ("APrice")double APrice ){
+         ModelAndView model = new ModelAndView("allowanceList");
+         AllowanceOrderDAO adao = (AllowanceOrderDAO)context.getBean("AllowanceOrderDAO");
+		  SalesOrderDAO dao = (SalesOrderDAO)context.getBean("SalesOrderDAO");
+		  List<AllowanceOrder> AllowanceOrderList = adao.getList2();
+		  long pid= AllowanceOrderList.get(aid-1).getProductId();
+		  long soid= AllowanceOrderList.get(aid-1).getsoid();
+		  System.out.println("APrice"+APrice);
+		  adao.confirmallowance(pid, soid , APrice);
+			System.out.println("aid="+aid);
 			model.addObject("AllowanceOrderList",AllowanceOrderList);
 		 
 		  return model;

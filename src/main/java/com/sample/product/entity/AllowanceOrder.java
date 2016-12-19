@@ -10,6 +10,7 @@ public class AllowanceOrder {
     private Date allowanceOrderTime;
     private Date allowanceConfirmTime;
     private double aPrice;
+    private String detail;
 
 
     /* getters and setters */
@@ -57,6 +58,12 @@ public class AllowanceOrder {
 	}
 	public void setaPrice(double aPrice) {
 		this.aPrice = aPrice;
+	}
+	public String getDetail() {
+		return detail;
+	}
+	public void setDetail(String detail) {
+		this.detail = detail;
 	}
 
 }

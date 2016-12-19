@@ -55,12 +55,12 @@ public class AllowanceOrderDAODB implements AllowanceOrderDAO{
 		
 	}*/
 	
-	public void insert(long mid, long pid, long soid , String detail) {
+	public void insert(long mid, long pid, long soid , String detail,long autoid) {
 		System.out.println("mid: " + mid);
 		System.out.println("pid: " + pid);
 		System.out.println("soid: " + soid);
 		// remove first parameter when Id is auto-increment
-	    String sql = "INSERT INTO allowanceOrder (ProductID, ManagerID, SOID, allowanceOrderTime , Detail) VALUES(?, ?, ?, NOW(),?)";
+	    String sql = "INSERT INTO allowanceOrder (ProductID, ManagerID, SOID, allowanceOrderTime , Detail ,Autoid) VALUES(?, ?, ?, NOW(),? , ?)";
 	    String sql2 = "UPDATE salesorderitem SET State = 'Allowance Requested' "
 				+ "WHERE SOID = ? AND ProductID = ?";
 		try {
@@ -70,6 +70,7 @@ public class AllowanceOrderDAODB implements AllowanceOrderDAO{
 			smt.setLong(2, mid);
 			smt.setLong(3, soid);
 			smt.setString(4, detail);
+			smt.setLong(5, autoid);
 			smt.executeUpdate();			
 			smt.close();
 			smt2 = conn.prepareStatement(sql2);
@@ -92,18 +93,21 @@ public class AllowanceOrderDAODB implements AllowanceOrderDAO{
 	}
 
 	
-	public void confirmallowance(long pid,long soid) {
+	public void confirmallowance(long pid,long soid,double APrice) {
 		//String sql = "SELECT SOID FROM SalesOrder "
-		String sql = "UPDATE allowanceOrder SET allowanceConfirmTime = Now() "
-				+ "WHERE SOID = ? AND ProductID = ?";
+		String sql = "UPDATE allowanceOrder SET allowanceConfirmTime = Now() , APrice = ? "
+				+ "WHERE SOID = ? AND ProductID = ? ";
 		String sql2 = "UPDATE salesorderitem SET State = 'Allowance Confirmed' "
 				+ "WHERE SOID = ? AND ProductID = ?";
+		
 		System.out.println("pid="+pid+"soid="+soid);
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setLong(1, soid);
-			smt.setLong(2, pid);
+			smt.setDouble(1, APrice);
+			smt.setLong(2, soid);
+			smt.setLong(3, pid);
+			
 			smt.executeUpdate();			
 			smt.close();
 			smt2 = conn.prepareStatement(sql2);
@@ -128,7 +132,10 @@ public class AllowanceOrderDAODB implements AllowanceOrderDAO{
 		String sql = "SELECT * FROM allowanceorder";
 		return getList(sql);
 	}
-	
+	public List<AllowanceOrder> getList2(){
+		String sql = "SELECT * FROM allowanceorder WHERE allowanceConfirmTime is null ";
+		return getList(sql);
+	}
 	public List<AllowanceOrder> getList(String sql) {
 		
 		List<AllowanceOrder> AllowanceOrderList = new ArrayList<AllowanceOrder>();
@@ -145,6 +152,7 @@ public class AllowanceOrderDAODB implements AllowanceOrderDAO{
 				aAllowance.setAllowanceOrderTime(rs.getDate("allowanceOrderTime"));
 				aAllowance.setAllowanceConfirmTime(rs.getDate("allowanceConfirmTime"));
 				aAllowance.setaPrice(rs.getDouble("APrice"));
+				aAllowance.setDetail(rs.getString("Detail"));
 			
 				AllowanceOrderList.add(aAllowance);
 			}

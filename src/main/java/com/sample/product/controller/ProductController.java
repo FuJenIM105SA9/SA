@@ -259,9 +259,25 @@ public class ProductController {
 			String user=(String) session.getAttribute("username");
 			System.out.println(user);
 		}
-		else if(("sa".equals(account.getName()))&&"ilovesa".equals(account.getPassword())){
-			System.out.println("Manager Success");
+		else if(("sales".equals(account.getName()))&&"sales".equals(account.getPassword())){
+			System.out.println("Sales Success");
 			model = new ModelAndView("redirect:/productcon");
+			HttpSession session = request.getSession();
+			session.setAttribute("username",account.getName());
+			String user=(String) session.getAttribute("username");
+			System.out.println(user);
+		}
+		else if(("warehouse".equals(account.getName()))&&"warehouse".equals(account.getPassword())){
+			System.out.println("Warehouse Success");
+			model = new ModelAndView("redirect:/productWarehouse");
+			HttpSession session = request.getSession();
+			session.setAttribute("username",account.getName());
+			String user=(String) session.getAttribute("username");
+			System.out.println(user);
+		}
+		else if(("aftersales".equals(account.getName()))&&"aftersales".equals(account.getPassword())){
+			System.out.println("aftersales Success");
+			model = new ModelAndView("redirect:/productAfterSales");
 			HttpSession session = request.getSession();
 			session.setAttribute("username",account.getName());
 			String user=(String) session.getAttribute("username");

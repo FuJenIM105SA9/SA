@@ -119,16 +119,9 @@ span {
     </div>
     <ul class="nav navbar-nav">
   
-      <li><a href="reorderProduct">應進貨</a></li>
-      <li><a href="po">進貨單</a></li>
+
       <li><a href="sas">應發貨</a></li>
       <li><a href="sale">銷貨單</a></li>
-      <li><a href="returnList">應退貨</a></li>
-      <li><a href="returnListfinal">退貨單</a></li>
-      <li><a href="changeList">應換貨</a></li>
-      <li><a href="changeListfinal">換貨單</a></li>
-      <li><a href="allowanceList">應折讓</a></li>
-      <li><a href="allowanceListfinal">折讓單</a></li>
       <li><a href="productcon">產品</a></li>
       <li><a href="manager">會員</a></li>
     </ul>

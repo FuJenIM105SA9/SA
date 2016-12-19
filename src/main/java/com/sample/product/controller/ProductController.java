@@ -140,6 +140,38 @@ public class ProductController {
 		return model;
 	}
 	
+	@RequestMapping(value = "/searchManagerSalesmen", method = RequestMethod.POST)
+	public ModelAndView searchManagerSalesmen(){
+		ModelAndView model = new ModelAndView("redirect:/managerSalesmen");
+		
+		return model;
+	}//getProductList
+	@RequestMapping(value = "/searchManagerSalesmen", method = RequestMethod.GET)
+	public ModelAndView searchManagerSalesmen2(@ModelAttribute("search") String name){
+		ModelAndView model = new ModelAndView("managerSalesmen");
+		ManagerDAO dao = (ManagerDAO) context.getBean("managerDAO");
+		List<Manager> list = dao.getList2(name);
+	
+		model.addObject(list);
+		return model;
+	}
+	
+	@RequestMapping(value = "/searchManagerWarehouse", method = RequestMethod.POST)
+	public ModelAndView searchManagerWarehouse(){
+		ModelAndView model = new ModelAndView("redirect:/managerWarehouse");
+		
+		return model;
+	}//getProductList
+	@RequestMapping(value = "/searchManagerWarehouse", method = RequestMethod.GET)
+	public ModelAndView searchManagerManagerWarehouse2(@ModelAttribute("search") String name){
+		ModelAndView model = new ModelAndView("managerWarehouse");
+		ManagerDAO dao = (ManagerDAO) context.getBean("managerDAO");
+		List<Manager> list = dao.getList2(name);
+	
+		model.addObject(list);
+		return model;
+	}
+	
 	@RequestMapping(value = "/search1", method = RequestMethod.POST)
 	public ModelAndView search1(){
 		ModelAndView model = new ModelAndView("redirect:/productcon");

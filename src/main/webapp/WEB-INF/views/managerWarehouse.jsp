@@ -21,6 +21,16 @@
         <h1>Jackie Chen產品管理系統</h1>
         <p class="lead">本系統為Jackie Chen研發之程式</p>
       </div>
+      
+      <div class="container">
+	<form method="get" action="searchManagerWarehouse" id="searchForm">
+	
+<div class="form-group">
+<input type="text" name="search" placeholder="輸入關鍵字" required>	
+</div>
+<div class="form-group">
+<button type="submit" class="glyphicon glyphicon-search"></button>
+</div>
      
 	<div class="container">
 		<div class="row">

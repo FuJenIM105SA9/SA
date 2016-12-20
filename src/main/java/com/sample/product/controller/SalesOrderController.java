@@ -392,7 +392,7 @@ public class SalesOrderController {
 			System.out.println("pid3:"+pid);
 			System.out.println("mid3:"+mid);
 	    	String name ="s"+SalesOrder.getSoid()+"m"+mid+"p"+pid+".jpg";
-	        String filePath = request.getSession().getServletContext().getRealPath("/") + "resources\\allowanceFileUpload\\";  
+	        String filePath = request.getSession().getServletContext().getRealPath("/") + "resources/allowanceFileUpload/";  
 	    	//
 	        File dir = new File(filePath);
 	        if (!dir.exists()){

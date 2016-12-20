@@ -55,7 +55,7 @@
 				
 					  	    <td>${AllowanceOrder.getAId()}</td>
 					  	    <td>
-					  		<img src="resources\allowanceFileUpload\<c:out value="s${AllowanceOrder.soid}m${AllowanceOrder.managerId}p${AllowanceOrder.productId}"/>.jpg" width="30%">
+					  		<img src="resources/allowanceFileUpload/<c:out value="s${AllowanceOrder.soid}m${AllowanceOrder.managerId}p${AllowanceOrder.productId}"/>.jpg" width="30%">
 					  		</td>
 					  		<td>${AllowanceOrder.detail}</td>
 					  		<td><form method="get" action="allowanceconfirm" id="allowanceconfirmForm">

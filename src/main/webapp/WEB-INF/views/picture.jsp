@@ -31,7 +31,7 @@
         <input type="submit" value="Upload"> Press here to upload the file! (<200mb)
     </form>
     ${message}<p>
-    <img src="resources\fileUpload\<c:out value="${product.id}"/>.jpg" width="30%">
+    <img src="resources/fileUpload/<c:out value="${product.id}"/>.jpg" width="30%">
     <div class="col-md-12">
 
     	<a class="btn btn-primary" href="return">reutrn</a>

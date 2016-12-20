@@ -44,14 +44,11 @@ public class ProductController {
 		ModelAndView model = new ModelAndView("purchaseOrder");
 		return model;
 	}
-	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView login(){
 		ModelAndView model = new ModelAndView("product");
 		return model;
 	}//getProductList
-	
-	
 	@RequestMapping(value = "/product", method = RequestMethod.GET)
 	public ModelAndView getProductList(){
 		ModelAndView model = new ModelAndView("product");
@@ -60,7 +57,6 @@ public class ProductController {
 		model.addObject(list);
 		return model;
 	}//getProductList
-	
 	@RequestMapping(value = "/manager", method = RequestMethod.GET)
 	public ModelAndView getMemberList(){
 		ModelAndView model = new ModelAndView("manager");
@@ -69,7 +65,6 @@ public class ProductController {
 		model.addObject(list);
 		return model;
 	}
-	
 	@RequestMapping(value = "/managerSalesmen", method = RequestMethod.GET)
 	public ModelAndView memberSales(){
 		ModelAndView model = new ModelAndView("managerSalesmen");
@@ -78,7 +73,6 @@ public class ProductController {
 		model.addObject(list);
 		return model;
 	}
-	
 	@RequestMapping(value = "/managerWarehouse", method = RequestMethod.GET)
 	public ModelAndView memberWarehouse(){
 		ModelAndView model = new ModelAndView("managerWarehouse");
@@ -87,7 +81,6 @@ public class ProductController {
 		model.addObject(list);
 		return model;
 	}
-	
 	@RequestMapping(value = "/managerAfterSales", method = RequestMethod.GET)
 	public ModelAndView memberAftersales(){
 		ModelAndView model = new ModelAndView("managerAfterSales");
@@ -96,7 +89,6 @@ public class ProductController {
 		model.addObject(list);
 		return model;
 	}
-	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public ModelAndView logout(HttpServletRequest request){
 		HttpSession session = request.getSession();
@@ -107,7 +99,6 @@ public class ProductController {
 		model.addObject(list);
 		return model;
 	}//getProductList
-
 	@RequestMapping(value = "/search", method = RequestMethod.POST)
 	public ModelAndView search(){
 		ModelAndView model = new ModelAndView("redirect:/product");
@@ -123,7 +114,6 @@ public class ProductController {
 		model.addObject(list);
 		return model;
 	}
-	
 	@RequestMapping(value = "/searchManager", method = RequestMethod.POST)
 	public ModelAndView searchManager(){
 		ModelAndView model = new ModelAndView("redirect:/managerAfterSales");
@@ -139,7 +129,6 @@ public class ProductController {
 		model.addObject(list);
 		return model;
 	}
-	
 	@RequestMapping(value = "/searchManagerSalesmen", method = RequestMethod.POST)
 	public ModelAndView searchManagerSalesmen(){
 		ModelAndView model = new ModelAndView("redirect:/managerSalesmen");
@@ -155,7 +144,6 @@ public class ProductController {
 		model.addObject(list);
 		return model;
 	}
-	
 	@RequestMapping(value = "/searchManagerWarehouse", method = RequestMethod.POST)
 	public ModelAndView searchManagerWarehouse(){
 		ModelAndView model = new ModelAndView("redirect:/managerWarehouse");
@@ -171,7 +159,6 @@ public class ProductController {
 		model.addObject(list);
 		return model;
 	}
-	
 	@RequestMapping(value = "/search1", method = RequestMethod.POST)
 	public ModelAndView search1(){
 		ModelAndView model = new ModelAndView("redirect:/productcon");
@@ -187,7 +174,6 @@ public class ProductController {
 		model.addObject(list);
 		return model;
 	}
-	
 	@RequestMapping(value = "/search2", method = RequestMethod.POST)
 	public ModelAndView search2(){
 		ModelAndView model = new ModelAndView("redirect:/productCust");
@@ -218,7 +204,6 @@ public class ProductController {
 		model.addObject(list);
 		return model;
 	}
-	
 	@RequestMapping(value = "/searchCat1", method = RequestMethod.POST)
 	public ModelAndView searchCat1(){
 		ModelAndView model = new ModelAndView("redirect:/productCust");
@@ -234,13 +219,10 @@ public class ProductController {
 		model.addObject(list);
 		return model;
 	}
-
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView index(){
 		return getProductList();
 	}//getProductList
-	//list all products	
-	
 	@RequestMapping(value = "/productAfterSales", method = RequestMethod.POST)
 	public ModelAndView productAfterSales(){
 		ModelAndView model = new ModelAndView("productAfterSales");
@@ -257,7 +239,6 @@ public class ProductController {
 		model.addObject(list);
 		return model;
 	}
-	
 	@RequestMapping(value = "/productWarehouse", method = RequestMethod.POST)
 	public ModelAndView productWarehouse(){
 		ModelAndView model = new ModelAndView("productWarehouse");
@@ -274,7 +255,6 @@ public class ProductController {
 		model.addObject(list);
 		return model;
 	}
-	
 	@RequestMapping(value = "/productCust", method = RequestMethod.POST)
 	public ModelAndView productCust(){
 		ModelAndView model = new ModelAndView("productCust");
@@ -291,7 +271,6 @@ public class ProductController {
 		model.addObject(list);
 		return model;
 	}
-	
 	@RequestMapping(value = "/productSalesmen", method = RequestMethod.POST)
 	public ModelAndView productcon(){
 		ModelAndView model = new ModelAndView("productcon");
@@ -299,8 +278,7 @@ public class ProductController {
 		List<Product> list = dao.getList();
 		model.addObject(list);
 		return model;
-	}//getProductList
-	
+	}
 	@RequestMapping(value = "/productSalesmen", method = RequestMethod.GET)
 	public ModelAndView productconUser(){
 		ModelAndView model = new ModelAndView("productcon");
@@ -309,13 +287,11 @@ public class ProductController {
 		model.addObject(list);
 		return model;
 	}//getProductList
-	
 	@RequestMapping(value = "/insertProduct", method = RequestMethod.GET)
 	public ModelAndView insertProductPage(){
 		ModelAndView model = new ModelAndView("insertProduct");
 		return model;
 	}//insertProductPage
-	
 	@RequestMapping(value = "/insertProduct", method = RequestMethod.POST)
 	public ModelAndView insertProduct(@ModelAttribute Product product){
 		ModelAndView model = new ModelAndView("redirect:/productcon");	
@@ -324,7 +300,6 @@ public class ProductController {
 		dao.insert(product);
 		return model;
 	}//insertProduct
-	
 	@RequestMapping(value = "/deleteProduct", method = RequestMethod.GET)
 	public ModelAndView deleteProduct(@ModelAttribute Product product, long id){
 		ModelAndView model = new ModelAndView("redirect:/productcon");	
@@ -333,7 +308,6 @@ public class ProductController {
 		dao.delete(id);
 		return model;
 	}
-	
 	@RequestMapping(value = "/updateProduct", method = RequestMethod.GET)
 	public ModelAndView updateproductpage(@ModelAttribute Product product){
 		ModelAndView model = new ModelAndView("updateproduct");
@@ -342,7 +316,6 @@ public class ProductController {
 		model.addObject("product", product);
 		return model;
 	}//insertProductPage
-
 	@RequestMapping(value = "/updateProduct", method = RequestMethod.POST)
 	public ModelAndView modify(@ModelAttribute Product product){
 		ModelAndView model = new ModelAndView("redirect:/productcon");	
@@ -352,7 +325,6 @@ public class ProductController {
 		
 		return model;
 	}//insertProduct
-		
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView checkLogin(@ModelAttribute Account account,HttpServletRequest request, Manager man) {
 		ModelAndView model = new ModelAndView("redirect:/product");	
@@ -403,15 +375,11 @@ public class ProductController {
 		
 		return model;
 	}
-	
-	
-	
     @RequestMapping(value = "/newuser", method = RequestMethod.GET)
 	public ModelAndView newuser(){
 		ModelAndView model = new ModelAndView("newuser");
 		return model;
 	}
-    
     @RequestMapping(value = "/newuser", method = RequestMethod.POST)
 	public ModelAndView newuser(@ModelAttribute Manager manager){
 		ModelAndView model = new ModelAndView("redirect:product");	

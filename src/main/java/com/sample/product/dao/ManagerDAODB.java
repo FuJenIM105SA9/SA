@@ -32,7 +32,7 @@ public class ManagerDAODB implements ManagerDAO {
 	}
 	
 	public List<Manager> getList2(String name){
-		String sql = "SELECT * FROM manager WHERE Name LIKE '%"+name+"%'";
+		String sql = "SELECT * FROM manager WHERE Identity = 'Customer' AND Name LIKE '%"+name+"%'";
 		return getList(sql);
 	}
 
@@ -51,6 +51,7 @@ public class ManagerDAODB implements ManagerDAO {
 				manager.setPhone(rs.getString("phone"));
 				manager.setAddress(rs.getString("address"));
 				manager.setPassword(rs.getString("password"));
+				manager.setIdentity(rs.getString("identity"));
 				managerList.add(manager);
 			}
 			rs.close();
@@ -72,7 +73,7 @@ public class ManagerDAODB implements ManagerDAO {
 	public void insert(Manager manager) {
 
 		// remove first parameter when Id is auto-increment
-	    String sql = "INSERT INTO manager (Name, Phone, Address, Password) VALUES(?, ?, ?, ?)";	
+	    String sql = "INSERT INTO manager (Name, Phone, Address, Password, Identity) VALUES(?, ?, ?, ?, ?)";	
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
@@ -80,6 +81,7 @@ public class ManagerDAODB implements ManagerDAO {
 			smt.setString(2, manager.getPhone());
 			smt.setString(3, manager.getAddress());
 			smt.setString(4, manager.getPassword());
+			smt.setString(4, manager.getIdentity());
 			smt.executeUpdate();			
 			smt.close();
  

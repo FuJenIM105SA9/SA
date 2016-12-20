@@ -60,7 +60,7 @@ public class picturecontroller {
     	//String name = file.getOriginalFilename();
     	System.out.println("id:"+product.getId());
     	String name =product.getId()+".jpg";
-        String filePath = request.getSession().getServletContext().getRealPath("/") + "resources\\fileUpload\\";  
+        String filePath = request.getSession().getServletContext().getRealPath("/") + "resources/fileUpload/";  
     	//
         File dir = new File(filePath);
         if (!dir.exists()){

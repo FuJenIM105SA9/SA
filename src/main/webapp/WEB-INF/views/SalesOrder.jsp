@@ -41,7 +41,7 @@
 					    	<td>${SalesOrder.orderTime}</td>
 					  		<td>
 					  		<c:choose>
-					  				<c:when test="${empty SalesOrder.custArrivalTime && SalesOrder.state == 'Paid'}">
+					  				<c:when test="${empty SalesOrder.custArrivalTime && SalesOrder.state == 'Deliveried'}">
 										<a class="btn btn-primary" href="arrive?id=${SalesOrder.id}">到貨</a>
     								</c:when>
     								<c:when test="${SalesOrder.state == 'Return Requested'}">

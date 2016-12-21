@@ -60,7 +60,7 @@ public class ChangeOrderDAODB implements ChangeOrderDAO{
 		System.out.println("pid: " + pid);
 		System.out.println("soid: " + soid);
 		// remove first parameter when Id is auto-increment
-	    String sql = "INSERT INTO returnOrder (ProductID, ManagerID, SOID, returnOrderTime) VALUES(?, ?, ?, NOW())";
+	    String sql = "INSERT INTO changeOrder (ProductID, ManagerID, SOID, changeOrderTime) VALUES(?, ?, ?, NOW())";
 	    String sql2 = "UPDATE salesorderitem SET State = 'Change Requested' "
 				+ "WHERE SOID = ? AND ProductID = ?";
 		try {

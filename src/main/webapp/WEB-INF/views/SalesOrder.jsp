@@ -53,13 +53,16 @@
     								<c:when test="${SalesOrder.state =='Allowance Requested'}">
 										已申請折讓
     								</c:when>
+    								<c:when test="${SalesOrder.state =='Paid'}">
+										已付款，即將出貨
+    								</c:when>
     								<c:otherwise>
         								${SalesOrder.custArrivalTime}
     								</c:otherwise>
 							</c:choose>			
 								
 					  		<td><c:choose>
-					  				<c:when test="${SalesOrder.state=='Paid'||SalesOrder.state=='Arrived'}">
+					  				<c:when test="${SalesOrder.state=='Paid'||SalesOrder.state=='Deliverir'||SalesOrder.state=='Arrived'}">
 										<a class="btn btn-primary" href="returnProduct?id=${SalesOrder.id}">退貨</a>
     								</c:when>
     								<c:when test="${SalesOrder.state == 'Change Requested'}">
@@ -67,6 +70,9 @@
     								</c:when>
     								<c:when test="${SalesOrder.state =='Allowance Requested'}">
 										已申請折讓
+    								</c:when>
+    								<c:when test="${SalesOrder.state =='Return Confirmed'}">
+										已確認退貨申請
     								</c:when>
     								<c:otherwise>
         							處理中
@@ -83,8 +89,14 @@
     								<c:when test="${SalesOrder.state =='Allowance Requested'}">
 										已申請折讓
     								</c:when>
+    								<c:when test="${SalesOrder.state =='Change Confirmed'}">
+										已確認換貨申請
+    								</c:when>
     								<c:when test="${SalesOrder.state=='Paid'}">
-										貨未到
+										已付款，即將出貨
+    								</c:when>
+    								<c:when test="${SalesOrder.state=='Deliveried'}">
+										運輸途中
     								</c:when>
     								<c:otherwise>
         							處理中
@@ -103,8 +115,14 @@
     								<c:when test="${SalesOrder.state =='Change Requested'}">
 										已申請換貨
     								</c:when>
+    								<c:when test="${SalesOrder.state =='Allowance Confirmed'}">
+										已確認折讓申請
+    								</c:when>
     								<c:when test="${SalesOrder.state=='Paid'}">
-										貨未到
+										已付款，即將出貨
+    								</c:when>
+    								<c:when test="${SalesOrder.state=='Deliveried'}">
+										運輸途中
     								</c:when>
     								<c:otherwise>
         							處理中

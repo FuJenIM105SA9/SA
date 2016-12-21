@@ -2,10 +2,6 @@ package com.sample.product.entity;
 
 import java.io.Serializable;
 
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
-import org.springframework.context.annotation.ScopedProxyMode;
-
 //configuration for session, please refer to: http://tuhrig.de/making-a-spring-bean-session-scoped/
 //@Component
 //@Scope(value="session", proxyMode=ScopedProxyMode.TARGET_CLASS)

@@ -217,9 +217,10 @@ public class SalesOrderController {
 		  List<SalesOrder> SalesOrderList = sdao.getList2(mid);
 		  long pid= SalesOrderList.get(id).getProductId();
 		  long soid= SalesOrderList.get(id).getSoid();
-		  dao.insert(mid, pid, soid);;
+		  dao.insert(mid, pid, soid);
+		  List<SalesOrder> SalesOrderList2 = sdao.getList2(mid);
 			//model.addObject("ReturnOrderList",ReturnOrderList);
-			model.addObject("SalesOrderList",SalesOrderList);
+			model.addObject("SalesOrderList",SalesOrderList2);
 		  return model;
 	}
 	
@@ -273,8 +274,9 @@ public class SalesOrderController {
 		  long pid= SalesOrderList.get(id).getProductId();
 		  long soid= SalesOrderList.get(id).getSoid();
 		  dao.delivery(pid,soid);
+		  List<SalesOrder> SalesOrderList2 = dao.getList5();
 			System.out.println("id="+id);
-			model.addObject("SalesOrderList",SalesOrderList);
+			model.addObject("SalesOrderList",SalesOrderList2);
 		 
 		  return model;
 		 }
@@ -462,8 +464,9 @@ public class SalesOrderController {
 		  long pid= SalesOrderList.get(id).getProductId();
 		  long soid= SalesOrderList.get(id).getSoid();
 		 rdao.confirmreturn(pid, soid);
+		 List<SalesOrder> SalesOrderList2 = dao.getList6();
 			System.out.println("id="+id);
-			model.addObject("SalesOrderList",SalesOrderList);
+			model.addObject("SalesOrderList",SalesOrderList2);
 		 
 		  return model;
 		 }
@@ -488,8 +491,9 @@ public class SalesOrderController {
 		  long pid= SalesOrderList.get(id).getProductId();
 		  long soid= SalesOrderList.get(id).getSoid();
 		 cdao.confirmchange(pid, soid);
+		  List<SalesOrder> SalesOrderList2 = dao.getList7();
 			System.out.println("id="+id);
-			model.addObject("SalesOrderList",SalesOrderList);
+			model.addObject("SalesOrderList",SalesOrderList2);
 		 
 		  return model;
 		 }

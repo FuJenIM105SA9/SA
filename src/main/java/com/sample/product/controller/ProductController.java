@@ -330,8 +330,9 @@ public class ProductController {
 		ModelAndView model = new ModelAndView("redirect:/product");	
 		Account account_session = (Account)context.getBean("account");
 		ManagerDAO dao = (ManagerDAO)context.getBean("managerDAO");
-		
-		if(account.getName().equals(dao.get(account.getName()).getName()) && account.getPassword().equals(dao.get(account.getName()).getPassword())){
+		System.out.println("id: " + dao.get(account.getName()).getPassword());
+		System.out.println("name: "+ dao.get(account.getName()).getName());
+		if(account.getName().equals(dao.get(account.getName()).getName()) && account.getPassword().equals(dao.get(account.getName()).getPassword())&&((dao.get(account.getName()).getIdentity().equals("Customer")))){
 			account_session.setName(account.getName());
 			System.out.println("Success");
 			model = new ModelAndView("redirect:/productCust");
@@ -340,16 +341,18 @@ public class ProductController {
 			String user=(String) session.getAttribute("username");
 			System.out.println(user);
 		}
-		else if(("sales".equals(account.getName()))&&"sales".equals(account.getPassword())){
-			System.out.println("Sales Success");
+		else if(account.getName().equals(dao.get(account.getName()).getName()) && account.getPassword().equals(dao.get(account.getName()).getPassword())&&((dao.get(account.getName()).getIdentity().equals("Salesmen")))){
+			account_session.setName(account.getName());
+			System.out.println("Success");
 			model = new ModelAndView("redirect:/productSalesmen");
 			HttpSession session = request.getSession();
 			session.setAttribute("username",account.getName());
 			String user=(String) session.getAttribute("username");
 			System.out.println(user);
 		}
-		else if(("warehouse".equals(account.getName()))&&"warehouse".equals(account.getPassword())){
-			System.out.println("Warehouse Success");
+		else if(account.getName().equals(dao.get(account.getName()).getName()) && account.getPassword().equals(dao.get(account.getName()).getPassword())&&((dao.get(account.getName()).getIdentity().equals("Warehouse")))){
+			account_session.setName(account.getName());
+			System.out.println("Success");
 			model = new ModelAndView("redirect:/productWarehouse");
 			HttpSession session = request.getSession();
 			session.setAttribute("username",account.getName());
@@ -381,11 +384,31 @@ public class ProductController {
 		return model;
 	}
     @RequestMapping(value = "/newuser", method = RequestMethod.POST)
-	public ModelAndView newuser(@ModelAttribute Manager manager){
-		ModelAndView model = new ModelAndView("redirect:product");	
+	public ModelAndView newuser(@ModelAttribute Manager manager, HttpServletRequest request){
+		String code = request.getParameter("code");
+		String identity = request.getParameter("identity");
 		ManagerDAO dao = (ManagerDAO) context.getBean("managerDAO");
-		manager.setId(dao.count());
-		dao.insert(manager);
+		ModelAndView model = new ModelAndView("redirect:product");
+    	if(identity.equals("Customer") && code.equals("")){
+    		model = new ModelAndView("redirect:product");
+    		manager.setId(dao.count());
+    		dao.insert(manager);
+    	}else if(identity.equals("Salesmen") && code.equals("sales")){
+    		model = new ModelAndView("redirect:product");
+    		manager.setId(dao.count());
+    		dao.insert(manager);
+    	}else if(identity.equals("Warehouse") && code.equals("warehouse")){
+    		model = new ModelAndView("redirect:product");
+    		manager.setId(dao.count());
+    		dao.insert(manager);
+    	}else if(identity.equals("Aftersales") && code.equals("aftersales")){
+    		model = new ModelAndView("redirect:product");
+    		manager.setId(dao.count());
+    		dao.insert(manager);
+    	}else{
+    		System.out.println("Register has failed");
+    	}
+
 		return model;
 	}
 }//ProductController

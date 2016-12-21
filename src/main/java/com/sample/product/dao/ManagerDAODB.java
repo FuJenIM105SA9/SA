@@ -1,4 +1,5 @@
 /**
+ /**
  * sample program for web programming written by Ben Wu
  * reference: http://www.mkyong.com/spring/maven-spring-jdbc-example/
  */
@@ -81,7 +82,7 @@ public class ManagerDAODB implements ManagerDAO {
 			smt.setString(2, manager.getPhone());
 			smt.setString(3, manager.getAddress());
 			smt.setString(4, manager.getPassword());
-			smt.setString(4, manager.getIdentity());
+			smt.setString(5, manager.getIdentity());
 			smt.executeUpdate();			
 			smt.close();
  
@@ -112,6 +113,7 @@ public class ManagerDAODB implements ManagerDAO {
 				manager.setPhone(rs.getString("phone"));
 				manager.setAddress(rs.getString("address"));
 				manager.setPassword(rs.getString("password"));
+				manager.setIdentity(rs.getString("identity"));
 			}
 			rs.close();
 			smt.close();
@@ -142,6 +144,7 @@ public class ManagerDAODB implements ManagerDAO {
 				manager.setPhone(rs.getString("phone"));
 				manager.setAddress(rs.getString("address"));
 				manager.setPassword(rs.getString("password"));
+				manager.setIdentity(rs.getString("identity"));
 			}
 			rs.close();
 			smt.close();
@@ -214,4 +217,3 @@ public class ManagerDAODB implements ManagerDAO {
 	}
 
 }//
-

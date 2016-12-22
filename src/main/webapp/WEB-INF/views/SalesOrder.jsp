@@ -41,7 +41,7 @@
 					    	<td>${SalesOrder.orderTime}</td>
 					  		<td>
 					  		<c:choose>
-					  				<c:when test="${empty SalesOrder.custArrivalTime && SalesOrder.state == 'Deliveried'}">
+					  				<c:when test="${SalesOrder.state == 'Deliveried'||SalesOrder.state == 'Change Confirmed'}">
 										<a class="btn btn-primary" href="arrive?id=${SalesOrder.id}">到貨</a>
     								</c:when>
     								<c:when test="${SalesOrder.state == 'Return Requested'}">
@@ -62,7 +62,7 @@
 							</c:choose>			
 								
 					  		<td><c:choose>
-					  				<c:when test="${SalesOrder.state=='Paid'||SalesOrder.state=='Deliverir'||SalesOrder.state=='Arrived'}">
+					  				<c:when test="${SalesOrder.state=='Paid'||SalesOrder.state=='Deliveried'||SalesOrder.state=='Arrived'}">
 										<a class="btn btn-primary" href="returnProduct?id=${SalesOrder.id}">退貨</a>
     								</c:when>
     								<c:when test="${SalesOrder.state == 'Change Requested'}">
@@ -92,6 +92,7 @@
     								<c:when test="${SalesOrder.state =='Change Confirmed'}">
 										已確認換貨申請
     								</c:when>
+    								
     								<c:when test="${SalesOrder.state=='Paid'}">
 										已付款，即將出貨
     								</c:when>

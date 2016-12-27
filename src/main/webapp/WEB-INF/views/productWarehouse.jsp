@@ -75,6 +75,9 @@
                 <h4>${product.category}</h4>
                 <h5>${product.details}</h5>
                 <h5>TWD ${product.price}</h5>
+                 <h5>庫存量：${product.inventory}</h5>
+                 <h5>安全存量：${product.reorderPoint}</h5>
+                 
             </div>
        </div> 
     </c:forEach>    

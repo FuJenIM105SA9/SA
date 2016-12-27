@@ -350,7 +350,7 @@ public class SalesOrderController {
  	 		long pid=SalesOrderList.get((int)SalesOrder.getAutoid()-1).getProductId();
  	 		SalesOrder.setProductId(pid);
  		
- 		pid = SalesOrder.getProductId();
+ 		
  		
 		System.out.println("autoid2:"+autoid);
 		System.out.println("soid2:"+SalesOrder.getSoid());
@@ -411,7 +411,74 @@ public class SalesOrderController {
 	        model.addObject("SalesOrder",SalesOrder);
 	        return model;
 	    }
-	
+	 
+	 @RequestMapping(value = "/checkAllowancePrice", method = RequestMethod.GET)
+		public ModelAndView checkallowanceprice(@ModelAttribute AllowanceOrder allowance,@ModelAttribute SalesOrder SalesOrder,HttpServletRequest request){
+			ModelAndView model = new ModelAndView("checkAllowancePrice");
+			HttpSession session = request.getSession();
+	 		String user=(String) session.getAttribute("username");
+	 		ManagerDAO managerDAO = (ManagerDAO)context.getBean("managerDAO");
+	        SalesOrderDAO dao = (SalesOrderDAO) context.getBean("SalesOrderDAO");
+	 		long mid = managerDAO.get(user).getId();
+	 		List<SalesOrder> SalesOrderList = dao.getList2(mid);
+	 		long pid=SalesOrderList.get((int)SalesOrder.getAutoid()-1).getProductId();
+            long soid = SalesOrder.getSoid();
+			System.out.println("autoid1:"+SalesOrder.getAutoid());
+			System.out.println("pid:"+pid);
+			System.out.println("mid:"+mid);
+			System.out.println("soid:"+SalesOrder.getSoid());
+	        //allowance.setsoid(SalesOrder.getSoid());
+	        //allowance.setProductId(pid); 
+	        //allowance.setManagerId(mid);
+	       //model.addObject("allowance",allowance);
+			 
+	         AllowanceOrderDAO adao = (AllowanceOrderDAO)context.getBean("AllowanceOrderDAO");
+			  List<AllowanceOrder> AllowanceOrderList = adao.getList3(mid,pid,soid);
+			 
+		
+				model.addObject("AllowanceOrderList",AllowanceOrderList);
+			 
+		    return model;
+		  
+		  
+		}
+
+	 @RequestMapping(value = "/acceptAllowance", method = RequestMethod.GET)
+		public ModelAndView acceptAllowance(@ModelAttribute AllowanceOrder allowance, @ModelAttribute ("soid") long soid, @ModelAttribute ("pid") long pid,HttpServletRequest request){
+			ModelAndView model = new ModelAndView("SalesOrder");
+	         HttpSession session = request.getSession();
+	 		String user=(String) session.getAttribute("username");
+	 		ManagerDAO managerDAO = (ManagerDAO)context.getBean("managerDAO");
+	 		long mid = managerDAO.get(user).getId();
+	         AllowanceOrderDAO adao = (AllowanceOrderDAO)context.getBean("AllowanceOrderDAO");
+			  SalesOrderDAO sdao = (SalesOrderDAO)context.getBean("SalesOrderDAO");
+			 
+	        
+			  adao.accept(mid, pid, soid);
+			  List<SalesOrder> SalesOrderList = sdao.getList2(mid);
+				//model.addObject("ReturnOrderList",ReturnOrderList);
+				model.addObject("SalesOrderList",SalesOrderList);
+			  return model;
+		}
+	 
+	 @RequestMapping(value = "/rejectAllowance", method = RequestMethod.GET)
+		public ModelAndView rejectAllowance(@ModelAttribute AllowanceOrder allowance, @ModelAttribute ("soid") long soid, @ModelAttribute ("pid") long pid,HttpServletRequest request){
+			ModelAndView model = new ModelAndView("SalesOrder");
+	         HttpSession session = request.getSession();
+	 		String user=(String) session.getAttribute("username");
+	 		ManagerDAO managerDAO = (ManagerDAO)context.getBean("managerDAO");
+	 		long mid = managerDAO.get(user).getId();
+	         AllowanceOrderDAO adao = (AllowanceOrderDAO)context.getBean("AllowanceOrderDAO");
+			  SalesOrderDAO sdao = (SalesOrderDAO)context.getBean("SalesOrderDAO");
+			  
+			  
+			  adao.reject(mid, pid, soid);
+			  List<SalesOrder> SalesOrderList = sdao.getList2(mid);
+				//model.addObject("ReturnOrderList",ReturnOrderList);
+				model.addObject("SalesOrderList",SalesOrderList);
+			  return model;
+		}
+	 
 	@RequestMapping(value = "/allowanceList", method = RequestMethod.GET)
 	public ModelAndView allowanceList(){
          ModelAndView model = new ModelAndView("allowanceList");

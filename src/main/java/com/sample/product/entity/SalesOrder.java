@@ -17,6 +17,7 @@ public class SalesOrder {
     private String Desc;
 
     private String State;
+   
 
     /* getters and setters */
     public long getId(){

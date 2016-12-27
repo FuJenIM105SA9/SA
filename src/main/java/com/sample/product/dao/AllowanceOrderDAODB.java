@@ -128,12 +128,88 @@ public class AllowanceOrderDAODB implements AllowanceOrderDAO{
 		}
 		
 	}
+	public void accept(long mid,long pid,long soid) {
+		//String sql = "SELECT SOID FROM SalesOrder "
+		String sql = "UPDATE allowanceOrder SET State = 'accepted' "
+				+ "WHERE SOID = ? AND ProductID = ? AND State is null ";
+		String sql2 = "UPDATE salesorderitem SET State = 'Allowance Accepted' "
+				+ "WHERE SOID = ? AND ProductID = ?";
+		
+		System.out.println("pid="+pid+"soid="+soid);
+		try {
+			conn = dataSource.getConnection();
+			smt = conn.prepareStatement(sql);
+			
+			smt.setLong(1, soid);
+			smt.setLong(2, pid);
+			
+			smt.executeUpdate();			
+			smt.close();
+			smt2 = conn.prepareStatement(sql2);
+			smt2.setLong(1, soid);
+			smt2.setLong(2, pid);
+			smt2.executeUpdate();			
+			smt2.close();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {}
+			}
+		}
+		
+	}
+	public void reject(long mid,long pid,long soid) {
+		//String sql = "SELECT SOID FROM SalesOrder "
+		String sql = "UPDATE allowanceOrder SET State = 'rejected' "
+				+ "WHERE SOID = ? AND ProductID = ? AND State is null ";
+		String sql2 = "UPDATE salesorderitem SET State = 'Arrived' "
+				+ "WHERE SOID = ? AND ProductID = ?";
+		
+		System.out.println("pid="+pid+"soid="+soid);
+		try {
+			conn = dataSource.getConnection();
+			smt = conn.prepareStatement(sql);
+			
+			smt.setLong(1, soid);
+			smt.setLong(2, pid);
+			
+			smt.executeUpdate();			
+			smt.close();
+			smt2 = conn.prepareStatement(sql2);
+			smt2.setLong(1, soid);
+			smt2.setLong(2, pid);
+			smt2.executeUpdate();			
+			smt2.close();
+
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {}
+			}
+		}
+		
+	}
+	
 	public List<AllowanceOrder> getList(){
 		String sql = "SELECT * FROM allowanceorder";
 		return getList(sql);
 	}
 	public List<AllowanceOrder> getList2(){
 		String sql = "SELECT * FROM allowanceorder WHERE allowanceConfirmTime is null ";
+		return getList(sql);
+	}
+	public List<AllowanceOrder> getList3(long mid ,long pid ,long soid){
+		String sql = "SELECT * FROM allowanceorder "
+				+"WHERE ManagerID = "+mid+" AND SOID = " + soid + " AND ProductID = " + pid + " AND State is null ";
 		return getList(sql);
 	}
 	public List<AllowanceOrder> getList(String sql) {

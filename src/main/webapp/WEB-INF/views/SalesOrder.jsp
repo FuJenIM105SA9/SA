@@ -74,6 +74,10 @@
     								<c:when test="${SalesOrder.state =='Return Confirmed'}">
 										已確認退貨申請
     								</c:when>
+    								<c:when test="${SalesOrder.state =='Allowance Confirmed'}">
+										已確認折讓申請
+									
+    								</c:when>
     								<c:otherwise>
         							處理中
     								</c:otherwise>
@@ -91,6 +95,10 @@
     								</c:when>
     								<c:when test="${SalesOrder.state =='Change Confirmed'}">
 										已確認換貨申請
+    								</c:when>
+    								<c:when test="${SalesOrder.state =='Allowance Confirmed'}">
+										已確認折讓申請
+									
     								</c:when>
     								
     								<c:when test="${SalesOrder.state=='Paid'}">
@@ -117,8 +125,13 @@
 										已申請換貨
     								</c:when>
     								<c:when test="${SalesOrder.state =='Allowance Confirmed'}">
-										已確認折讓申請
+										<a class="btn btn-primary" href="checkAllowancePrice?soid=${SalesOrder.soid}&autoid=${SalesOrder.autoid}&pid=${SalesOrder.productId}">查看折讓金額</a>
+										
     								</c:when>
+    								<c:when test="${SalesOrder.state =='Allowance Accepted'}">
+										已接受折讓
+    								</c:when>
+    								
     								<c:when test="${SalesOrder.state=='Paid'}">
 										已付款，即將出貨
     								</c:when>

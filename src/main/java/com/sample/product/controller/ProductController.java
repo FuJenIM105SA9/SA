@@ -334,7 +334,7 @@ public class ProductController {
 		System.out.println("name: "+ dao.get(account.getName()).getName());
 		if(account.getName().equals(dao.get(account.getName()).getName()) && account.getPassword().equals(dao.get(account.getName()).getPassword())&&((dao.get(account.getName()).getIdentity().equals("Customer")))){
 			account_session.setName(account.getName());
-			System.out.println("Success");
+			System.out.println("customer Success");
 			model = new ModelAndView("redirect:/productCust");
 			HttpSession session = request.getSession();
 			session.setAttribute("username",account.getName());
@@ -343,7 +343,7 @@ public class ProductController {
 		}
 		else if(account.getName().equals(dao.get(account.getName()).getName()) && account.getPassword().equals(dao.get(account.getName()).getPassword())&&((dao.get(account.getName()).getIdentity().equals("Salesmen")))){
 			account_session.setName(account.getName());
-			System.out.println("Success");
+			System.out.println("salesmen Success");
 			model = new ModelAndView("redirect:/productSalesmen");
 			HttpSession session = request.getSession();
 			session.setAttribute("username",account.getName());
@@ -352,14 +352,15 @@ public class ProductController {
 		}
 		else if(account.getName().equals(dao.get(account.getName()).getName()) && account.getPassword().equals(dao.get(account.getName()).getPassword())&&((dao.get(account.getName()).getIdentity().equals("Warehouse")))){
 			account_session.setName(account.getName());
-			System.out.println("Success");
+			System.out.println("warehouse Success");
 			model = new ModelAndView("redirect:/productWarehouse");
 			HttpSession session = request.getSession();
 			session.setAttribute("username",account.getName());
 			String user=(String) session.getAttribute("username");
 			System.out.println(user);
 		}
-		else if(("aftersales".equals(account.getName()))&&"aftersales".equals(account.getPassword())){
+		else if(account.getName().equals(dao.get(account.getName()).getName()) && account.getPassword().equals(dao.get(account.getName()).getPassword())&&((dao.get(account.getName()).getIdentity().equals("Aftersales")))){
+			account_session.setName(account.getName());
 			System.out.println("aftersales Success");
 			model = new ModelAndView("redirect:/productAfterSales");
 			HttpSession session = request.getSession();

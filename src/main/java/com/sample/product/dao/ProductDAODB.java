@@ -26,7 +26,11 @@ public class ProductDAODB implements ProductDAO {
 	}
 
 	public List<Product> getList(){
-		String sql = "SELECT * FROM product";
+		String sql = "SELECT * FROM product WHERE State = 'Released'";
+		return getList(sql);
+	}
+	public List<Product> getList2(){
+		String sql = "SELECT * FROM product ";
 		return getList(sql);
 	}
 public List<Product> getList3(String ser,String stype){
@@ -174,12 +178,12 @@ public List<Product> getList4(String c){
 	}
 	
 public void release(long id) {
-		
-		String sql = "UPDATE product SET State = 'Release' WHERE productID = ?";
+		System.out.println("pid="+id);
+		String sql = "UPDATE product SET State = 'Released' WHERE productID = ?";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setLong(1, id);
+			smt.setLong(1, id+1);
 			smt.executeUpdate();			
 			smt.close();
  
@@ -196,12 +200,12 @@ public void release(long id) {
 	}
 	
 	public void delete(long id) {
-		
+		System.out.println("pid="+id);
 		String sql = "UPDATE product SET State = 'Removed' WHERE productID = ?";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
-			smt.setLong(1, id);
+			smt.setLong(1, id+1);
 			smt.executeUpdate();			
 			smt.close();
  

@@ -7,6 +7,7 @@ import com.sample.product.entity.Product;
 public interface ProductDAO {
 	
 	public List<Product> getList();
+	public List<Product> getList2();
 	public void insert(Product aProduct);
 
 	public Product get(long id);

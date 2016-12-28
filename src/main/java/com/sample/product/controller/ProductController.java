@@ -243,7 +243,7 @@ public class ProductController {
 	public ModelAndView productWarehouse(){
 		ModelAndView model = new ModelAndView("productWarehouse");
 		ProductDAO dao = (ProductDAO) context.getBean("productDAO");
-		List<Product> list = dao.getList();
+		List<Product> list = dao.getList2();
 		model.addObject(list);
 		return model;
 	}
@@ -251,7 +251,7 @@ public class ProductController {
 	public ModelAndView productWarehouse2(){
 		ModelAndView model = new ModelAndView("productWarehouse");
 		ProductDAO dao = (ProductDAO) context.getBean("productDAO");
-		List<Product> list = dao.getList();
+		List<Product> list = dao.getList2();
 		model.addObject(list);
 		return model;
 	}
@@ -275,7 +275,7 @@ public class ProductController {
 	public ModelAndView productcon(){
 		ModelAndView model = new ModelAndView("productcon");
 		ProductDAO dao = (ProductDAO) context.getBean("productDAO");
-		List<Product> list = dao.getList();
+		List<Product> list = dao.getList2();
 		model.addObject(list);
 		return model;
 	}
@@ -283,7 +283,7 @@ public class ProductController {
 	public ModelAndView productconUser(){
 		ModelAndView model = new ModelAndView("productcon");
 		ProductDAO dao = (ProductDAO) context.getBean("productDAO");
-		List<Product> list = dao.getList();
+		List<Product> list = dao.getList2();
 		model.addObject(list);
 		return model;
 	}//getProductList
@@ -294,7 +294,7 @@ public class ProductController {
 	}//insertProductPage
 	@RequestMapping(value = "/insertProduct", method = RequestMethod.POST)
 	public ModelAndView insertProduct(@ModelAttribute Product product){
-		ModelAndView model = new ModelAndView("redirect:/productcon");	
+		ModelAndView model = new ModelAndView("redirect:/productSalesmen");	
 		ProductDAO dao = (ProductDAO) context.getBean("productDAO");
 		product.setId(dao.count());
 		dao.insert(product);
@@ -302,7 +302,7 @@ public class ProductController {
 	}//insertProduct
 	@RequestMapping(value = "/deleteProduct", method = RequestMethod.GET)
 	public ModelAndView deleteProduct(@ModelAttribute Product product,@ModelAttribute("id") int id){
-		ModelAndView model = new ModelAndView("redirect:productcon");	
+		ModelAndView model = new ModelAndView("redirect:/productSalesmen");	
 		ProductDAO dao = (ProductDAO) context.getBean("productDAO");
 		product.setId(dao.count());
 		dao.delete(id);
@@ -310,7 +310,7 @@ public class ProductController {
 	}
 	@RequestMapping(value = "/releaseProduct", method = RequestMethod.GET)
 	public ModelAndView releaseProduct(@ModelAttribute Product product,@ModelAttribute("id") int id){
-		ModelAndView model = new ModelAndView("redirect:productcon");	
+		ModelAndView model = new ModelAndView("redirect:/productSalesmen");	
 		ProductDAO dao = (ProductDAO) context.getBean("productDAO");
 		product.setId(dao.count());
 		dao.release(id);
@@ -326,7 +326,7 @@ public class ProductController {
 	}//insertProductPage
 	@RequestMapping(value = "/updateProduct", method = RequestMethod.POST)
 	public ModelAndView modify(@ModelAttribute Product product){
-		ModelAndView model = new ModelAndView("redirect:/productcon");	
+		ModelAndView model = new ModelAndView("redirect:/productSalesmen");	
 		ProductDAO dao = (ProductDAO) context.getBean("productDAO");
 		//product.setId(dao.count());
 		dao.update(product);

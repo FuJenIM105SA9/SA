@@ -53,11 +53,9 @@
 	<form action="searchCat1">
 	<div  class="form-group">
 							<select class="form-control" name="c"> 
-  							<option>Horror</option>
-  							<option>Action</option>
-  							<option>Drama</option>
-  							<option>True Story</option>
-  							<option>Comedy</option>
+  							<option>Mobile</option>
+  							<option>Camera</option>
+  							<option>Graphics Card</option>
 							</select><button  type="submit" class="glyphicon glyphicon-search"></button>							
 					</div>	
 

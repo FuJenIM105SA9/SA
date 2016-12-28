@@ -28,11 +28,9 @@
 				<form method="post" action="insertProduct" id="insertForm">
 					<div class="form-group">
 						類別:<select class="form-control" name="category">
-  						<option>Horror</option>
-  						<option>Comedy</option>
-  						<option>Action</option>
-  						<option>Drama</option>
-  						<option>True Story</option>
+  						<option>Mobile</option>
+  							<option>Camera</option>
+  							<option>Graphics Card</option>
 						</select>
 					</div>
 					<div class="form-group">

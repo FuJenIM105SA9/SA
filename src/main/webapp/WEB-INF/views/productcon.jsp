@@ -78,10 +78,11 @@
     						</form></td>
     						<td>${product.state}</td>
 					  		<td>
-					  			<a class="btn btn-default" href="updateProduct?id=${product.id}">修改</a>
+					  				<a class="btn btn-sm btn-danger deleteBtn" href="releaseProduct?id=${status.index}">上架</a>
 					  			<a class="btn btn-sm btn-danger deleteBtn" href="deleteProduct?id=${status.index}">下架</a>
-					  			<a class="btn btn-sm btn-danger deleteBtn" href="releaseProduct?id=${status.index}">上架</a>
-					  			<a class="btn btn-default" href="createPO?id=${product.id}">進貨</a>
+					  	
+					  			<a class="btn btn-primary" href="updateProduct?id=${product.id}">修改</a>
+					  			<a class="btn btn-primary" href="createPO?id=${product.id}">進貨</a>
 					  		</td>
 					  	</tr>
 				  	</c:forEach>

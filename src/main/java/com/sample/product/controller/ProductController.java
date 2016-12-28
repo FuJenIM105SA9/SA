@@ -301,11 +301,19 @@ public class ProductController {
 		return model;
 	}//insertProduct
 	@RequestMapping(value = "/deleteProduct", method = RequestMethod.GET)
-	public ModelAndView deleteProduct(@ModelAttribute Product product, long id){
-		ModelAndView model = new ModelAndView("redirect:/productcon");	
+	public ModelAndView deleteProduct(@ModelAttribute Product product,@ModelAttribute("id") int id){
+		ModelAndView model = new ModelAndView("redirect:productcon");	
 		ProductDAO dao = (ProductDAO) context.getBean("productDAO");
 		product.setId(dao.count());
 		dao.delete(id);
+		return model;
+	}
+	@RequestMapping(value = "/releaseProduct", method = RequestMethod.GET)
+	public ModelAndView releaseProduct(@ModelAttribute Product product,@ModelAttribute("id") int id){
+		ModelAndView model = new ModelAndView("redirect:productcon");	
+		ProductDAO dao = (ProductDAO) context.getBean("productDAO");
+		product.setId(dao.count());
+		dao.release(id);
 		return model;
 	}
 	@RequestMapping(value = "/updateProduct", method = RequestMethod.GET)

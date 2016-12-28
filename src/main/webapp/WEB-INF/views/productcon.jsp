@@ -56,9 +56,11 @@
 				  		<th>庫存量</th>
 				  		<th>安全存量</th>
 				  		<th>圖片上傳</th>
+				  		<th>狀態</th>
 				  		<th>編輯</th>
+				  		
 				  	</tr>
-				  	<c:forEach items="${productList}" var="product">
+				  	<c:forEach items="${productList}" var="product" varStatus="status">
 					  	<tr>
 					  		<td>${product.id}</td>
 					  		<td>${product.category}</td>
@@ -66,6 +68,7 @@
 					  		<td><textarea rows="6" cols="75">${product.details}</textarea></td>
 					  		<td>${product.inventory}</td>
 					  		<td>${product.reorderPoint}</td>
+					  		
 					  		<td>
 					  		<img src="resources\fileUpload\<c:out value="${product.id}"/>.jpg" width="30%">
 					  		
@@ -73,9 +76,11 @@
 					  		<a class="btn btn-primary" href="pic?id=${product.id}">upload</a>
         				
     						</form></td>
+    						<td>${product.state}</td>
 					  		<td>
 					  			<a class="btn btn-default" href="updateProduct?id=${product.id}">修改</a>
-					  			<a class="btn btn-sm btn-danger deleteBtn" href="deleteProduct?id=${product.id}">刪除</a>
+					  			<a class="btn btn-sm btn-danger deleteBtn" href="deleteProduct?id=${status.index}">下架</a>
+					  			<a class="btn btn-sm btn-danger deleteBtn" href="releaseProduct?id=${status.index}">上架</a>
 					  			<a class="btn btn-default" href="createPO?id=${product.id}">進貨</a>
 					  		</td>
 					  	</tr>

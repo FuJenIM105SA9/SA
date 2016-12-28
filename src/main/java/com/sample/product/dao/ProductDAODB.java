@@ -57,6 +57,7 @@ public List<Product> getList4(String c){
 				aProduct.setReorderPoint(rs.getInt("reorderPoint"));
 				aProduct.setDetails(rs.getString("details"));
 				aProduct.setPrice(rs.getDouble("price"));
+				aProduct.setState(rs.getString("State"));
 				productList.add(aProduct);
 			}
 			rs.close();
@@ -79,7 +80,7 @@ public List<Product> getList4(String c){
 	public void insert(Product aProduct) {
 
 		// remove first parameter when Id is auto-increment
-	    String sql = "INSERT INTO product (Category, Description, Inventory, ReorderPoint , Price) VALUES(?, ?, ?, ?, ?, ?)";	
+	    String sql = "INSERT INTO product (Category, Description, Inventory, ReorderPoint , Price, State) VALUES(?, ?, ?, ?, ?, ?, ?)";	
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
@@ -89,6 +90,7 @@ public List<Product> getList4(String c){
 			smt.setInt(4, aProduct.getReorderPoint());
 			smt.setString(5, aProduct.getDetails());
 			smt.setDouble(6, aProduct.getPrice());
+			smt.setString(7, aProduct.getState());
 			smt.executeUpdate();			
 			smt.close();
  
@@ -121,6 +123,7 @@ public List<Product> getList4(String c){
 				aProduct.setReorderPoint(rs.getInt("reorderPoint"));
 				aProduct.setDetails(rs.getString("details"));
 				aProduct.setPrice(rs.getDouble("price"));
+				aProduct.setState(rs.getString("State"));
 			}
 			rs.close();
 			smt.close();
@@ -140,7 +143,7 @@ public List<Product> getList4(String c){
 	
 	public void update(Product aProduct) {
 		
-		String sql = "UPDATE product SET Category=?, Description=?, Inventory=?, ReorderPoint=?, Details=? ,Price=?"
+		String sql = "UPDATE product SET Category=?, Description=?, Inventory=?, ReorderPoint=?, Details=? ,Price=?, State=?"
 				+ "WHERE productID = ?";
 		
 		try {
@@ -152,7 +155,8 @@ public List<Product> getList4(String c){
 			smt.setInt(4, aProduct.getReorderPoint());
 			smt.setString(5, aProduct.getDetails());
 			smt.setDouble(6, aProduct.getPrice());
-			smt.setLong(7, aProduct.getId());
+			smt.setString(7, aProduct.getState());
+			smt.setLong(8, aProduct.getId());
 			smt.executeUpdate();			
 			smt.close();
  
@@ -169,9 +173,31 @@ public List<Product> getList4(String c){
 		
 	}
 	
+public void release(long id) {
+		
+		String sql = "UPDATE product SET State = 'Release' WHERE productID = ?";
+		try {
+			conn = dataSource.getConnection();
+			smt = conn.prepareStatement(sql);
+			smt.setLong(1, id);
+			smt.executeUpdate();			
+			smt.close();
+ 
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+ 
+		} finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {}
+			}
+		}
+	}
+	
 	public void delete(long id) {
 		
-		String sql = "DELETE FROM product WHERE productID = ?";
+		String sql = "UPDATE product SET State = 'Removed' WHERE productID = ?";
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
@@ -212,6 +238,7 @@ public Product get(Product aProduct) {
 				aProduct.setReorderPoint(rs.getInt("reorderPoint"));
 				aProduct.setDetails(rs.getString("details"));	
 				aProduct.setPrice(rs.getDouble("price"));
+				aProduct.setState(rs.getString("State"));
 			}
 			rs.close();
 			smt.close();

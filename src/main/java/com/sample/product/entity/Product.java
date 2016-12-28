@@ -8,6 +8,7 @@ public class Product {
     private int reorderPoint;
     private String details;
     private double price;
+    private String State;
 
     /* getters and setters */
     public long getId(){
@@ -59,5 +60,11 @@ public class Product {
     public void setPrice(double price){
     	this.price = price;
     }
+	public String getState() {
+		return State;
+	}
+	public void setState(String state) {
+		State = state;
+	}
 }//Product
 

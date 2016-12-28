@@ -14,6 +14,8 @@ public interface ProductDAO {
 	public void update(Product aProduct);
 	
 	public void delete(long id);
+	
+	public void release(long id);
 
 	public int count();
 

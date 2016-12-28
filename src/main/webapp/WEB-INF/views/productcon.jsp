@@ -53,6 +53,7 @@
 				  		<th>類別</th>
 				  		<th>片名</th>
 				  		<th>描述</th>
+				  		<th>價格</th>
 				  		<th>庫存量</th>
 				  		<th>安全存量</th>
 				  		<th>圖片上傳</th>
@@ -65,7 +66,8 @@
 					  		<td>${product.id}</td>
 					  		<td>${product.category}</td>
 					  		<td>${product.desc}</td>
-					  		<td><textarea rows="6" cols="75">${product.details}</textarea></td>
+					  		<td><textarea rows="6" cols="50">${product.details}</textarea></td>
+					  		<td>${product.price}</td>
 					  		<td>${product.inventory}</td>
 					  		<td>${product.reorderPoint}</td>
 					  		

@@ -34,9 +34,19 @@
 						</select>
 					</div>
 					<div class="form-group">
+						<label>名稱:</label>
+						<input type="text" name="desc" placeholder="輸入產品名稱" required>
+						<p class="help-block">產品名稱</p>
+					</div>
+					<div class="form-group">
+						<label>定價:</label>
+						<input type="number" name="price" placeholder="輸入產品定價" required>
+						<p class="help-block">產品價格</p>
+					</div>
+					<div class="form-group">
 						<label>描述:</label>
-						<input type="text" name="desc" placeholder="輸入產品敘述" required>
-						<p class="help-block">產品敘述</p>
+						<input type="text" name="details" placeholder="輸入產品描述" required>
+						<p class="help-block">產品描述</p>
 					</div>
 					<div class="form-group">
 						<label>庫存量:</label>

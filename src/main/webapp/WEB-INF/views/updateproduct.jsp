@@ -30,34 +30,33 @@
 				<input type="hidden" name="id" value="${product.id}">
 					<div class="form-group">
 						類別:<select class="form-control" name="category">
-  						<option>Horror</option>
-  						<option>Comedy</option>
-  						<option>Action</option>
-  						<option>Drama</option>
-  						<option>True Story</option>
+  						<option>Mobile</option>
+  							<option>Camera</option>
+  							<option>Graphics Card</option>
 						</select>
 					</div>
 					<div class="form-group">
-						<label>片名:</label>
+						<label>產品名稱:</label>
 						<input type="text" name="desc" value= ${product.desc}>
 						
 					</div>
 					<div class="form-group">
-						<label>庫存量:</label>
-						<input type="number" name="inventory" value= ${product.inventory} min="0" required>
-						<p class="help-block">目前庫存數量</p>
+						<label>產品描述:</label>
+						<textarea rows="4" cols="50"
+						type="text" name="details" value= ${product.details}>
+						</textarea>
+					</div>
+					<div class="form-group">
+						<label>產品價格:</label>
+						<input type="number" name="price" value= ${product.price}>
+						
 					</div>
 					<div class="form-group">
 						<label>安全存量:</label>
 						<input type="number" name="reorderPoint" value= ${product.reorderPoint} required>
 						<p class="help-block">當目前庫存數量低於此數字就應該進貨</p>
 					</div>
-					<div class="form-group">
-						<label>描述:</label>
-						<textarea rows="4" cols="50"
-						type="text" name="details" value= ${product.details}>
-						</textarea>
-					</div>
+					
 			  		<button type="submit" class="btn btn-default">修改完成</button>
 				</form>
 			</div>

@@ -84,7 +84,7 @@ public List<Product> getList4(String c){
 	public void insert(Product aProduct) {
 
 		// remove first parameter when Id is auto-increment
-	    String sql = "INSERT INTO product (Category, Description, Inventory, ReorderPoint , Price, State) VALUES(?, ?, ?, ?, ?, ?, ?)";	
+	    String sql = "INSERT INTO product (Category, Description, Inventory, ReorderPoint , Details, Price) VALUES(?, ?, ?, ?, ?, ?)";	
 		try {
 			conn = dataSource.getConnection();
 			smt = conn.prepareStatement(sql);
@@ -94,7 +94,6 @@ public List<Product> getList4(String c){
 			smt.setInt(4, aProduct.getReorderPoint());
 			smt.setString(5, aProduct.getDetails());
 			smt.setDouble(6, aProduct.getPrice());
-			smt.setString(7, aProduct.getState());
 			smt.executeUpdate();			
 			smt.close();
  
@@ -147,7 +146,7 @@ public List<Product> getList4(String c){
 	
 	public void update(Product aProduct) {
 		
-		String sql = "UPDATE product SET Category=?, Description=?, Inventory=?, ReorderPoint=?, Details=? ,Price=?, State=?"
+		String sql = "UPDATE product SET Category=?, Description=?, ReorderPoint=?, Details=? ,Price=?"
 				+ "WHERE productID = ?";
 		
 		try {
@@ -155,12 +154,12 @@ public List<Product> getList4(String c){
 			smt = conn.prepareStatement(sql);
 			smt.setString(1, aProduct.getCategory());
 			smt.setString(2, aProduct.getDesc());
-			smt.setInt(3, aProduct.getInventory());
-			smt.setInt(4, aProduct.getReorderPoint());
-			smt.setString(5, aProduct.getDetails());
-			smt.setDouble(6, aProduct.getPrice());
-			smt.setString(7, aProduct.getState());
-			smt.setLong(8, aProduct.getId());
+			
+			smt.setInt(3, aProduct.getReorderPoint());
+			smt.setString(4, aProduct.getDetails());
+			smt.setDouble(5, aProduct.getPrice());
+		
+			smt.setLong(6, aProduct.getId());
 			smt.executeUpdate();			
 			smt.close();
  

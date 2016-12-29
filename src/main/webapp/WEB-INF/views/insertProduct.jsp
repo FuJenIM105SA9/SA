@@ -13,7 +13,7 @@
     <title>Jackie Chen產品管理</title>
 </head>
 <body>
-	<%@include file="navbarLogin.jspf" %>
+	<%@include file="navbarSalesmen.jspf" %>
 	<div class="container theme-showcase" role="main">
     
       <div class="jumbotron" >    

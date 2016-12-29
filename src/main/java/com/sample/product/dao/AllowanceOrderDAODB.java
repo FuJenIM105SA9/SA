@@ -96,7 +96,7 @@ public class AllowanceOrderDAODB implements AllowanceOrderDAO{
 	public void confirmallowance(long pid,long soid,double APrice) {
 		//String sql = "SELECT SOID FROM SalesOrder "
 		String sql = "UPDATE allowanceOrder SET allowanceConfirmTime = Now() , APrice = ? "
-				+ "WHERE SOID = ? AND ProductID = ? ";
+				+ "WHERE SOID = ? AND ProductID = ? AND State is null ";
 		String sql2 = "UPDATE salesorderitem SET State = 'Allowance Confirmed' "
 				+ "WHERE SOID = ? AND ProductID = ?";
 		

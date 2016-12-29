@@ -20,17 +20,25 @@
         <h1>Jackie Chen產品管理系統</h1>
         <p class="lead">本系統為Jackie Chen研發之程式</p>
       </div>
-      <form action="search">
-	<input type="text" name="search" placeholder="Search Name...">
-	<button  type="submit" class="glyphicon glyphicon-search"></button>
-	</form>
+      <div class="container">
+						<div class="col-md-6">
+							<form action="searchComment">
+								<div class="form-group">
+									<select class="form-control" name="c">
+										<option>Normal</option>
+										<option>Emergency</option>
+
+									</select> 
+									<br>
+									<button type="submit" class="glyphicon glyphicon-search"></button>
+								</div>
 	<div class="container">
 		<div class="row">
 			<br>
 			<div class="col-md-12">
 				<table class="table">
 				  	<tr>
-				  		<th>銷貨編號</th><th>商品類別</th><th>商品名稱</th><th>商品價格</th><th>銷貨時間</th><th>購買者編號</th><th>發貨</th>
+				  		<th>銷貨編號</th><th>商品類別</th><th>商品名稱</th><th>商品價格</th><th>銷貨時間</th><th>購買者編號</th><th>逾期狀態</th><th>發貨</th>
 				  	</tr>
 				  	<c:forEach items="${SalesOrderList}" var="SalesOrder">
 					  	<tr>
@@ -40,6 +48,7 @@
 					  		<td>${SalesOrder.price}</td>
 					    	<td>${SalesOrder.orderTime}</td>
 					    	<td>${SalesOrder.manid}</td>
+					    	<td>${SalesOrder.comment}</td> 
 			             	<td><a class="btn btn-primary" href="sa?id=${SalesOrder.id}">發貨</a>
 
 					  	</tr>

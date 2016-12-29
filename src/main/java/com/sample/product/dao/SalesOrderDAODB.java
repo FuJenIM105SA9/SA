@@ -92,7 +92,7 @@ public class SalesOrderDAODB implements SalesOrderDAO{
 		    	result = stUpdateProduct.executeUpdate();
 		    	stUpdateProduct.close();
 		    	//System.out.println(productID+"is updated");
-		    	String sqlInsertOrderItem = "INSERT INTO salesOrderitem (SOID, ProductID, Quantity, ManagerID, State ) VALUES(?, ?, 1, ? , 'Paid' )";
+		    	String sqlInsertOrderItem = "INSERT INTO salesOrderitem (SOID, ProductID, Quantity, ManagerID, OrderTime ,State, Comment ) VALUES(?, ?, 1, ? , NOW(),'Paid', 'Normal' )";
 		    	stInsertOrderItem = conn.prepareStatement(sqlInsertOrderItem);
 		    	stInsertOrderItem.setLong(1,orderID);
 		    	stInsertOrderItem.setLong(2,productID);
@@ -182,13 +182,40 @@ public void delivery(long pid,long soid) {
 	}
 	
 }
+
+public void remind(int id) {
+	//String sql = "SELECT SOID FROM SalesOrder "
+	String sql = "UPDATE salesorderitem SET Comment = 'Emergency' "
+			+ "WHERE id = ?";
+	System.out.println("id: " + id);
+	try {
+		conn = dataSource.getConnection();
+		smt = conn.prepareStatement(sql);
+		smt.setLong(1, id);
+		
+		smt.executeUpdate();			
+		smt.close();
+
+	} catch (SQLException e) {
+		throw new RuntimeException(e);
+
+	} finally {
+		if (conn != null) {
+			try {
+				conn.close();
+			} catch (SQLException e) {}
+		}
+	}
+	
+}
+
 public List<SalesOrder> getList1(long mid){
 	
 	String sql = "SELECT ProductID FROM SalesOrderItem";
 	return getList(sql);
 }
 public List<SalesOrder> getList2(long mid){
-	String sql = "SELECT product.ProductID,product.Category, product.Description, product.Price, salesorder.SOID,salesorder.OrderTime, salesorderitem.id, salesorderitem.DeliveryTime, salesorderitem.CustArrivalTime,salesorderitem.State, salesorderitem.ManagerID " 
+	String sql = "SELECT product.ProductID,product.Category, product.Description, product.Price, salesorder.SOID,salesorder.OrderTime, salesorderitem.id, salesorderitem.DeliveryTime, salesorderitem.CustArrivalTime,salesorderitem.State, salesorderitem.ManagerID, salesorderitem.Comment " 
 + "FROM product join salesorderitem ON product.ProductID = salesorderitem.ProductID "
 + "join salesorder ON salesorderitem.SOID = salesorder.SOID "
 
@@ -198,7 +225,7 @@ public List<SalesOrder> getList2(long mid){
 }
 
 public List<SalesOrder> getList3(long mid, long soid, long pid){
-	String sql = "SELECT product.ProductID,product.Category, product.Description, product.Price, salesorder.SOID,salesorder.OrderTime, salesorderitem.CustArrivalTime,salesorderitem.State " 
+	String sql = "SELECT product.ProductID,product.Category, product.Description, product.Price, salesorder.SOID,salesorder.OrderTime, salesorderitem.CustArrivalTime,salesorderitem.State, salesorderitem.Comment " 
 + "FROM product join salesorderitem ON product.ProductID = salesorderitem.ProductID "
 + "join salesorder ON salesorderitem.SOID = salesorder.SOID "
 			+ "WHERE salesorderitem.ManagerID = "+mid+" AND salesorderitem.SOID = " + soid + " AND product.ProductID = " + pid + "";
@@ -207,14 +234,14 @@ public List<SalesOrder> getList3(long mid, long soid, long pid){
 }
 
 public List<SalesOrder> getList4(){
-	String sql = "SELECT product.ProductID,product.Category, product.Description, product.Price, salesorder.SOID,salesorder.OrderTime, salesorderitem.id,salesorderitem.DeliveryTime,salesorderitem.CustArrivalTime,salesorderitem.State,salesorderitem.ManagerID " 
+	String sql = "SELECT product.ProductID,product.Category, product.Description, product.Price, salesorder.SOID,salesorder.OrderTime, salesorderitem.id,salesorderitem.DeliveryTime,salesorderitem.CustArrivalTime,salesorderitem.State,salesorderitem.ManagerID, salesorderitem.Comment " 
 + "FROM product join salesorderitem ON product.ProductID = salesorderitem.ProductID "
 + "join salesorder ON salesorderitem.SOID = salesorder.SOID "
 ;
 	return getList(sql);
 }
 public List<SalesOrder> getList5(){
-	String sql = "SELECT product.ProductID,product.Category, product.Description, product.Price, salesorder.SOID,salesorder.OrderTime, salesorderitem.id, salesorderitem.DeliveryTime, salesorderitem.CustArrivalTime,salesorderitem.State,salesorderitem.ManagerID " 
+	String sql = "SELECT product.ProductID,product.Category, product.Description, product.Price, salesorder.SOID,salesorder.OrderTime, salesorderitem.id, salesorderitem.DeliveryTime, salesorderitem.CustArrivalTime,salesorderitem.State,salesorderitem.ManagerID, salesorderitem.Comment " 
 + "FROM product join salesorderitem ON product.ProductID = salesorderitem.ProductID "
 + "join salesorder ON salesorderitem.SOID = salesorder.SOID "
 
@@ -222,7 +249,7 @@ public List<SalesOrder> getList5(){
 	return getList(sql);
 }
 public List<SalesOrder> getList6(){
-	String sql = "SELECT product.ProductID,product.Category, product.Description, product.Price, salesorder.SOID,salesorder.OrderTime, salesorderitem.id, salesorderitem.DeliveryTime, salesorderitem.CustArrivalTime,salesorderitem.State,salesorderitem.ManagerID " 
+	String sql = "SELECT product.ProductID,product.Category, product.Description, product.Price, salesorder.SOID,salesorder.OrderTime, salesorderitem.id, salesorderitem.DeliveryTime, salesorderitem.CustArrivalTime,salesorderitem.State,salesorderitem.ManagerID, salesorderitem.Comment " 
 + "FROM product join salesorderitem ON product.ProductID = salesorderitem.ProductID "
 + "join salesorder ON salesorderitem.SOID = salesorder.SOID "
 
@@ -231,12 +258,31 @@ public List<SalesOrder> getList6(){
 }
 
 public List<SalesOrder> getList7(){
-	String sql = "SELECT product.ProductID,product.Category, product.Description, product.Price, salesorder.SOID,salesorder.OrderTime, salesorderitem.id, salesorderitem.DeliveryTime, salesorderitem.CustArrivalTime,salesorderitem.State,salesorderitem.ManagerID " 
+	String sql = "SELECT product.ProductID,product.Category, product.Description, product.Price, salesorder.SOID,salesorder.OrderTime, salesorderitem.id, salesorderitem.DeliveryTime, salesorderitem.CustArrivalTime,salesorderitem.State,salesorderitem.ManagerID, salesorderitem.Comment " 
 + "FROM product join salesorderitem ON product.ProductID = salesorderitem.ProductID "
 + "join salesorder ON salesorderitem.SOID = salesorder.SOID "
 
 + "WHERE salesorderitem.State = 'Change Requested'";
 	return getList(sql);
+}
+
+public List<SalesOrder> getList9(String c){
+	String sql = "SELECT product.ProductID,product.Category, product.Description, product.Price, salesorder.SOID,salesorder.OrderTime, salesorderitem.id, salesorderitem.DeliveryTime, salesorderitem.CustArrivalTime,salesorderitem.State,salesorderitem.ManagerID, salesorderitem.Comment " 
++ "FROM product join salesorderitem ON product.ProductID = salesorderitem.ProductID "
++ "join salesorder ON salesorderitem.SOID = salesorder.SOID "
+
++ "WHERE salesorderitem.State = 'Paid' AND salesorderitem.Comment LIKE '%"+c+"%'";
+	return getList(sql);
+}
+
+public List<SalesOrder> getOverdueList(){
+	String sql = "SELECT product.ProductID,product.Category, product.Description, product.Price, salesorder.SOID,salesorder.OrderTime, salesorderitem.id, salesorderitem.DeliveryTime, salesorderitem.CustArrivalTime,salesorderitem.State,salesorderitem.ManagerID, salesorderitem.Comment " 
+			+ "FROM product join salesorderitem ON product.ProductID = salesorderitem.ProductID "
+			+ "join salesorder ON salesorderitem.SOID = salesorder.SOID "
+
+			+ "WHERE TIMESTAMPDIFF(DAY, salesorderitem.ordertime, NOW()) > 3 AND salesorderitem.DeliveryTime is NULL";
+	return getList(sql);
+	
 }
 
 
@@ -263,6 +309,7 @@ public List<SalesOrder> getList(String sql) {
 			asale.setState(rs.getString("State"));
 			asale.setManid(rs.getLong("ManagerID"));
 			asale.setDeliveryTime(rs.getDate("DeliveryTime"));
+			asale.setComment(rs.getString("Comment"));
 			
 			SalesOrderList.add(asale);
 		}
@@ -281,6 +328,8 @@ public List<SalesOrder> getList(String sql) {
 	}
 	return SalesOrderList;
 }
+
+
 
 // TODO Auto-generated method stub
 

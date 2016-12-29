@@ -20,6 +20,9 @@ public interface SalesOrderDAO {
 	public List<SalesOrder> getList5();
 	public List<SalesOrder> getList6();
 	public List<SalesOrder> getList7();
+	public List<SalesOrder> getList9(String c);
+	public List<SalesOrder> getOverdueList();
+	public void remind(int id);
 	public void arrive(long pid,long soid);
 	public void delivery(long pid,long soid) ;
 	

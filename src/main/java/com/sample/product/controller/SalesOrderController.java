@@ -588,4 +588,32 @@ public class SalesOrderController {
 		 
 		  return model;
 		 }
+	
+	@RequestMapping(value = "/overdue", method = RequestMethod.GET)
+	public ModelAndView listOverdue(){
+	
+		ModelAndView model = new ModelAndView("overdue");
+		SalesOrderDAO dao = (SalesOrderDAO)context.getBean("SalesOrderDAO");
+		 List<SalesOrder> SalesOrderList = dao.getOverdueList();
+		//logger.info(""+productList.size());
+		model.addObject("overdueList", SalesOrderList);
+		
+		return model;
+	}
+	
+	@RequestMapping(value = "/reminder", method = RequestMethod.GET)
+	public ModelAndView reminder(@ModelAttribute ("id") int id){
+	
+		ModelAndView model = new ModelAndView("redirect:/overdue");
+		SalesOrderDAO dao = (SalesOrderDAO)context.getBean("SalesOrderDAO");
+		dao.remind(id);
+		
+		//logger.info(""+productList.size());
+		
+		return model;
+	}
+	
+	
+	
+	
 }

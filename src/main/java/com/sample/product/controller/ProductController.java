@@ -24,10 +24,12 @@ import com.sample.product.entity.Account;
 import com.sample.product.entity.Manager;
 import com.sample.product.entity.Product;
 import com.sample.product.entity.PurchaseOrder;
+import com.sample.product.entity.SalesOrder;
 import com.sample.product.entity.ShoppingCart;
 import com.sample.product.dao.ManagerDAO;
 import com.sample.product.dao.ProductDAO;
 import com.sample.product.dao.PurchaseOrderDAO;
+import com.sample.product.dao.SalesOrderDAO;
 
 /**
  * Handles requests for the application home page.
@@ -204,6 +206,24 @@ public class ProductController {
 		model.addObject(list);
 		return model;
 	}
+	
+	@RequestMapping(value = "/searchComment", method = RequestMethod.POST)
+	public ModelAndView searchComment(){
+		ModelAndView model = new ModelAndView("redirect:/sas");
+		
+		return model;
+	}
+	@RequestMapping(value = "/searchComment", method = RequestMethod.GET)
+	public ModelAndView searchComment(@ModelAttribute("c") String c){
+		ModelAndView model = new ModelAndView("SalesOrderCon");
+		SalesOrderDAO dao = (SalesOrderDAO)context.getBean("SalesOrderDAO");
+		  List<SalesOrder> SalesOrderList = dao.getList9(c);
+		 
+	
+			model.addObject("SalesOrderList",SalesOrderList);
+		return model;
+	}
+	
 	@RequestMapping(value = "/searchCat1", method = RequestMethod.POST)
 	public ModelAndView searchCat1(){
 		ModelAndView model = new ModelAndView("redirect:/productCust");

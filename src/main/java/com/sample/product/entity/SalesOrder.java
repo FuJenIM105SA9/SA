@@ -17,6 +17,7 @@ public class SalesOrder {
     private String Desc;
 
     private String State;
+    private String Comment;
    
 
     /* getters and setters */
@@ -106,6 +107,12 @@ public long getAutoid() {
 }
 public void setAutoid(long autoid) {
 	this.autoid = autoid;
+}
+public String getComment() {
+	return Comment;
+}
+public void setComment(String comment) {
+	this.Comment = comment;
 }
 
 }

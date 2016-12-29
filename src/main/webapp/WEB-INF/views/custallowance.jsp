@@ -27,12 +27,15 @@
     <form method="POST" action="uploadAllowanceFile" enctype="multipart/form-data">
   <input type="hidden" name = "autoid" value="${SalesOrder.autoid}">
    <input type="hidden" name = "soid" value="${SalesOrder.soid}">
-          請選擇要上傳的商品瑕疵圖片: <input type="file" name="file"><br /> 
+          請選擇要上傳的商品瑕疵圖片: <input type="file" name="file"><br/> 
+           <img src="resources/allowanceFileUpload/<c:out value="s${SalesOrder.soid}m${SalesOrder.manid}p${SalesOrder.productId}"/>.jpg" width="30%">
+        <br>
+        <br>
         <input type="submit" value="Upload"> Press here to upload the file! (<200mb)
     </form>
     ${message}<p>
-    <img src="resources/allowanceFileUpload/<c:out value="s${SalesOrder.soid}m${SalesOrder.manid}p${SalesOrder.productId}"/>.jpg" width="30%">
-   <div class="col-md-3"></div>
+   <br>
+   
 	<div class="col-md-6">
 				<form method="get" action="aConfirm" id="aConfirmForm">
 				<input type="hidden" name = "autoid" value="${SalesOrder.autoid}">
@@ -42,7 +45,7 @@
 				
 						<input type="text" name="detail" placeholder="輸入產品情況" required>
 				
-			  		<button type="submit" class="btn btn-primary">確認折讓</button>
+			  		<button type="submit" class="btn btn-primary" style= "width: 20%;">確認折讓</button>
 				</form>
 			</div>
 			<div class="col-md-3"></div>

@@ -32,6 +32,9 @@
 									<br>
 									<button type="submit" class="glyphicon glyphicon-search"></button>
 								</div>
+								</form>
+								</div>
+								</div>
 	<div class="container">
 		<div class="row">
 			<br>

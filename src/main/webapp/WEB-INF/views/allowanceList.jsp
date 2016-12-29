@@ -48,7 +48,10 @@
 			<div class="col-md-12">
 				<table class="table">
 				  	<tr>
-				  		<th>折讓編號</th><th>商品情況</th><th>買家描述</th><th>折讓價格</th>
+				  		<th style= "width: 10%;">折讓編號</th>
+				  		<th style= "width: 20%;">商品情況</th>
+				  		<th style= "width: 20%;">買家描述</th>
+				  		<th style= "width: 20%;">折讓價格</th>
 				  	</tr>
 				  	<c:forEach items="${AllowanceOrderList}" var="AllowanceOrder">
 					  	<tr>
@@ -64,7 +67,7 @@
                                  <input type="number" name="APrice" placeholder="輸入折讓金額" required>	
                              </div>
 	                           <div class="form-group">
-                             <button type="submit" class="btn btn-primary">確認折讓</button>
+                             <button type="submit" class="btn btn-primary" style= "width: 50%;">確認折讓</button>
                             </div>
                             </form>
 					  	</tr>

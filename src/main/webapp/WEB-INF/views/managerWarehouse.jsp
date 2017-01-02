@@ -31,7 +31,8 @@
 <div class="form-group">
 <button type="submit" class="glyphicon glyphicon-search"></button>
 </div>
-     
+     </form>
+     </div>
 	<div class="container">
 		<div class="row">
 			<br>
@@ -44,6 +45,7 @@
 				  		<th>TEL</th>
 				  		<th>地址</th>
 				  		<th>密碼</th>
+				  		<th>身份</th>
 				  		
 				  	</tr>
 				  	<c:forEach items="${managerList}" var="manager">
@@ -51,9 +53,9 @@
 					  		<td>${manager.id}</td>
 					  		<td>${manager.name}</td>
 					  		<td>${manager.phone}</td>
-					  		<td><textarea rows="6" cols="75">${manager.address}</textarea></td>
+					  		<td><textarea rows="6" cols="50">${manager.address}</textarea></td>
 					  		<td>${manager.password}</td>
-					  	
+					  		<td>${manager.identity}</td>
 					  		
 					  		
 					  	</tr>

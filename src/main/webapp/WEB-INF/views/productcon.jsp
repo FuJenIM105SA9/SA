@@ -72,12 +72,12 @@
 					  		<td>${product.reorderPoint}</td>
 					  		
 					  		<td>
-					  		<img src="resources\fileUpload\<c:out value="${product.id}"/>.jpg" width="30%">
+					  		<img src="resources\fileUpload\<c:out value="${product.id}"/>.jpg" width="70%">
 					  		
-					  	
+					  	    <br>
 					  		<a class="btn btn-primary" href="pic?id=${product.id}">upload</a>
         				
-    						</form></td>
+    						</td>
     						<td>${product.state}</td>
 					  		<td>
 					  				<a class="btn btn-sm btn-danger deleteBtn" href="releaseProduct?id=${status.index}">上架</a>
